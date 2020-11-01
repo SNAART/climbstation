@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Climbstation</string>
+    <string name="scan_info">Start by connecting your device to ClimbStation by
+scanning the QR-code attached to the wall</string>
 </resources>
