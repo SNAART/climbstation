@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/ic_climb"
+    android:title="Climb"
+    android:icon="@drawable/icon_climb" />
+
+    <item
+        android:id="@+id/ic_create"
+        android:title="Create"
+        android:icon="@drawable/icon_edit_create" />
+
+    <item
+        android:id="@+id/ic_statistics"
+        android:title="Statistics"
+        android:icon="@drawable/icon_statistics" />
+
+    <item
+        android:id="@+id/ic_settings"
+        android:title="Settings"
+        android:icon="@drawable/icon_settings" />
+</menu>
