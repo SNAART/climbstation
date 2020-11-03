@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
 
     <Button
         android:id="@+id/button4"
@@ -11,7 +12,9 @@
         android:layout_height="0dp"
         android:layout_marginTop="444dp"
         android:layout_marginBottom="47dp"
+        android:backgroundTint="#D61D1D"
         android:text="Sign in"
+        android:textColor="#FBFAFA"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,6 +26,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="46dp"
         android:text="Create an account"
+        android:textColor="#121212"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,16 +55,14 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="281dp"
-        android:layout_height="62dp"
-        android:text="CLIMBSTATION"
-        android:textAlignment="center"
-        android:textSize="36sp"
+    <ImageView
+        android:layout_width="299dp"
+        android:layout_height="228dp"
+        android:layout_marginBottom="41dp"
+        android:src="@drawable/heading"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.797" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
