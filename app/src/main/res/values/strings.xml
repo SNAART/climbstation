@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Climbstation</string>
+    <string name="scan_info">Start by connecting your device to ClimbStation by
+scanning the QR-code attached to the wall</string>
+    <string name="stat_main">"Congratulations, you\n"
+                "climbed 8.1 meters\n"
+                "from 20 meters goal!\n"</string>
+    <string name="stat_time">Climbing time: </string>
+    <string name="stat_difficulty">Difficulty was: </string>
+    <string name="stat_lenght">Lenght climbed:  </string>
+    <string name="stat_speed">Average speed: </string>
+    <string name="stat_cal">Estimated Cal.: </string>
+    <string name="stat_date">This climbing was done:\n</string>
+    <string name="stat_btn">View earlier results and improvement</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
