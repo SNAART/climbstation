@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/background_image_mt_castillo"
+    android:backgroundTint="#6F000000"
     tools:context="com.example.climbstation.MainActivity">
 
     <FrameLayout
@@ -12,6 +13,7 @@
         android:layout_height="match_parent"
         android:id="@+id/fl_wrapper"
         android:layout_above="@+id/bottom_navigation_menu"
+
         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

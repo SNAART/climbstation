@@ -9,10 +9,99 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:text="Statistics" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-175dp"
+            android:layout_marginEnd="1dp"
+            android:src="@mipmap/cslogo_wh_red" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="140dp"
+            android:layout_marginEnd="52dp"
+            android:gravity="left"
+            android:text="@string/stat_main" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="219dp"
+            android:layout_marginEnd="100dp"
+            android:gravity="left"
+            android:text="@string/stat_time" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="248dp"
+            android:layout_marginEnd="102dp"
+            android:gravity="left"
+            android:text="@string/stat_difficulty" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="275dp"
+            android:layout_marginEnd="89dp"
+            android:gravity="left"
+            android:text="@string/stat_lenght" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="303dp"
+            android:layout_marginEnd="94dp"
+            android:gravity="left"
+            android:text="@string/stat_speed" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="331dp"
+            android:layout_marginEnd="96dp"
+            android:gravity="left"
+            android:text="@string/stat_cal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="383dp"
+            android:layout_marginEnd="55dp"
+            android:gravity="left"
+            android:text="@string/stat_date" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="457dp"
+            android:layout_marginEnd="25dp"
+
+            android:text="@string/stat_btn" />
+
+
     </RelativeLayout>
 </FrameLayout>
