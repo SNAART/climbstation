@@ -26,20 +26,21 @@
             android:id="@+id/textView9"
             android:layout_width="83dp"
             android:layout_height="15dp"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="516dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="504dp"
             android:text="Difficulty:"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="415dp"
+            android:layout_width="461dp"
 
-            android:layout_height="150dp"
+            android:layout_height="315dp"
+            android:layout_marginBottom="484dp"
             android:src="@mipmap/cslogo_wh_red"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="-15dp" />
 
         <TextView
             android:id="@+id/textView5"
@@ -76,8 +77,8 @@
             android:id="@+id/button"
             android:layout_width="151dp"
             android:layout_height="47dp"
-            android:layout_marginTop="540dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginTop="548dp"
+            android:layout_marginEnd="52dp"
             android:backgroundTint="#ED0A0A"
             android:text="Start"
             app:layout_constraintEnd_toEndOf="parent"

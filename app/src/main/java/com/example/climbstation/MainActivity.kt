@@ -13,6 +13,7 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.CaptureActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.login.*
+import kotlinx.android.synthetic.main.sign_in_form.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,9 +24,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
-        sign_in.setOnClickListener { startApp() }
-
+        sign_in.setOnClickListener { goToSignIn() }
     }
+
+    private fun goToSignIn() {
+        setContentView(R.layout.sign_in_form)
+        sign_in_2.setOnClickListener {
+            // TODO: login logic with firebase
+            startApp()
+        }
+    }
+
     private fun useFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_wrapper,fragment)
