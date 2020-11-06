@@ -12,6 +12,7 @@ import com.example.climbstation.fragments.StatisticsFragment
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.CaptureActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.login.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +22,17 @@ class MainActivity : AppCompatActivity() {
     private val settingsFragment = SettingsFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.login)
+        sign_in.setOnClickListener { startApp() }
+
+    }
+    private fun useFragment(fragment: Fragment) =
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fl_wrapper,fragment)
+            commit()
+        }
+
+    private fun startApp(){
         setContentView(R.layout.activity_main)
 
         useFragment(climbFragment)
@@ -40,13 +52,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
     }
-    private fun useFragment(fragment: Fragment) =
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_wrapper,fragment)
-            commit()
-        }
 
 }
 
