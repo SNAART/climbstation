@@ -17,13 +17,13 @@
         android:backgroundTint="#D61D1D"
         android:text="Sign in"
         android:textColor="#FBFAFA"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/sign_up"
         android:layout_width="315dp"
         android:layout_height="0dp"
         android:layout_marginBottom="46dp"
