@@ -1,17 +1,14 @@
 package com.example.climbstation
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.climbstation.fragments.ClimbFragment
 import com.example.climbstation.fragments.CreateFragment
 import com.example.climbstation.fragments.SettingsFragment
 import com.example.climbstation.fragments.StatisticsFragment
-import com.google.zxing.integration.android.IntentIntegrator
-import com.journeyapps.barcodescanner.CaptureActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.create_account.*
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.sign_in_form.*
 
@@ -25,8 +22,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
         sign_in.setOnClickListener { goToSignIn() }
+        sign_up.setOnClickListener { gotToSignUp()}
     }
 
+    private fun gotToSignUp(){
+        setContentView(R.layout.create_account)
+        sign_up_2.setOnClickListener {
+            startApp()
+        }
+    }
     private fun goToSignIn() {
         setContentView(R.layout.sign_in_form)
         sign_in_2.setOnClickListener {
