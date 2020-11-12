@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.sign_in_form)
         sign_in_2.setOnClickListener {
             // TODO: login logic with firebase
-            startApp()
+            startQr()
         }
     }
 
@@ -40,16 +40,16 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fl_wrapper,fragment)
             commit()
         }
+    private fun  startQr(){
+        val intent = Intent(this@MainActivity, QRScanActivity::class.java)
+        startActivity(intent)
+    }
 
     private fun startApp(){
         setContentView(R.layout.activity_main)
 
         useFragment(climbFragment)
-        /*button.setOnClickListener {
-            val intent = Intent(this@MainActivity, QRScanActivity::class.java)
-            // intent.putExtra("User", user);
-            startActivity(intent)
-        }*/
+
 
         bottom_navigation_menu.setOnNavigationItemSelectedListener {
             when (it.itemId){
