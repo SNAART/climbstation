@@ -20,6 +20,10 @@ class QRScanActivity: AppCompatActivity() {
         // qrScanner = findViewById(R.id.zxscan)
          scan_button.setOnClickListener {
              scanQRCode()
+             skip_button.setOnClickListener{
+                 val intent = Intent(this, MainActivity::class.java)
+                 startActivity(intent)
+             }
          }
 
      }
