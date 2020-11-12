@@ -11,6 +11,8 @@ import com.example.climbstation.fragments.SettingsFragment
 import com.example.climbstation.fragments.StatisticsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.login.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,16 +20,25 @@ class MainActivity : AppCompatActivity() {
     private val createFragment = CreateFragment()
     private val statisticsFragment = StatisticsFragment()
     private val settingsFragment = SettingsFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login)
-        sign_in.setOnClickListener {
-            val intent = Intent (this, LoginActivity::class.java )
-            startActivity(intent)
-        }
-        sign_up.setOnClickListener {
-            val intent = Intent (this, SignupActivity::class.java)
-            startActivity(intent)
+
+       var user = FirebaseAuth.getInstance().currentUser
+        if (user != null){
+            startApp()
+        }else {
+
+            setContentView(R.layout.login)
+            sign_in.setOnClickListener {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
+            sign_up.setOnClickListener {
+                val intent = Intent(this, SignupActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
