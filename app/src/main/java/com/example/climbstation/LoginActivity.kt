@@ -21,8 +21,6 @@ class LoginActivity : AppCompatActivity() {
         btn_log_in.setOnClickListener {
             doLogin()
         }
-
-
     }
 
     private fun doLogin() {
