@@ -41,6 +41,10 @@ class SettingsFragment : Fragment() {
         val view = inflater!!.inflate(R.layout.fragment_settings, container, false)
 
         view.tv_name.text = username
+        view.btn_log_out.setOnClickListener{
+            //have to refresh app
+            FirebaseAuth.getInstance().signOut();
+        }
         return view
         // Inflate the layout for this fragment
     }
