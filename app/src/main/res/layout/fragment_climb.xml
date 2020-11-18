@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/length"
             android:layout_width="83dp"
             android:layout_height="15dp"
             android:layout_marginStart="52dp"
@@ -23,7 +23,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/difficulty"
             android:layout_width="83dp"
             android:layout_height="15dp"
             android:layout_marginStart="44dp"
@@ -55,6 +55,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ListView
+            android:id="@+id/mylist"
             android:layout_width="207dp"
             android:layout_height="258dp"
             android:layout_marginEnd="32dp"
