@@ -72,6 +72,6 @@
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/cslogo_wh_red_edited" />
+        app:srcCompat="@mipmap/cslogo_wh_red_edited" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
