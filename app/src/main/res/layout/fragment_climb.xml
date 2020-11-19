@@ -11,65 +11,72 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView8"
-            android:layout_width="83dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="32dp"
+            android:id="@+id/length"
+            android:layout_width="152dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="28dp"
             android:text="Length:"
-            app:layout_constraintBottom_toTopOf="@+id/textView6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9"
-            app:layout_constraintVertical_bias="0.0" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/mode"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textView9"
-            android:layout_width="83dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="504dp"
+            android:id="@+id/difficulty"
+            android:layout_width="156dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="28dp"
             android:text="Difficulty:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/length"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="461dp"
-
-            android:layout_height="315dp"
-            android:layout_marginBottom="484dp"
-            android:src="@mipmap/cslogo_wh_red"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="-15dp" />
+            android:layout_width="413dp"
+            android:layout_height="88dp"
+            android:layout_marginTop="4dp"
+            android:src="@mipmap/cslogo_wh_red_thin"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="159dp"
             android:layout_height="21dp"
-            android:layout_marginTop="180dp"
-            android:layout_marginEnd="48dp"
-            android:text="Select Difficulty"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="30dp"
+            android:text="Select Difficulty:"
             android:textAlignment="center"
             android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/mylist"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <ListView
-            android:layout_width="207dp"
-            android:layout_height="258dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/mylist"
+            android:layout_width="150dp"
+            android:layout_height="235dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="72dp"
+            app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.479" />
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:layout_constraintVertical_bias="0.891" />
 
         <TextView
-            android:id="@+id/textView6"
-            android:layout_width="83dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="52dp"
-            android:layout_marginBottom="112dp"
+            android:id="@+id/mode"
+            android:layout_width="156dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="56dp"
             android:text="Mode:"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -77,12 +84,12 @@
             android:id="@+id/button"
             android:layout_width="151dp"
             android:layout_height="47dp"
-            android:layout_marginTop="548dp"
-            android:layout_marginEnd="52dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="92dp"
             android:backgroundTint="#ED0A0A"
             android:text="Start"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

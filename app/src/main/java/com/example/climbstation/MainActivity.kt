@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.login.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.android.synthetic.main.fragment_climb.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -70,5 +71,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
 }
+
 
