@@ -1,9 +1,11 @@
 package com.example.climbstation.fragments
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -44,26 +46,56 @@ class ClimbFragment : Fragment() {
 
         val view = inflater!!.inflate(R.layout.fragment_climb, container, false)
         // Inflate the layout for this fragment view.mylist.adapter = ArrayAdapter(this.context, android.R.layout.simple_list_item_1,listOf("car", "plane"))
+        view.mode.text = "Mode: ${selectedMode}"
+        view.mode.setOnClickListener{changeMode(view)}
         renderList(view)
         return view
     }
 
+    private val modeList: List<String> = arrayListOf("To next level", "Random", "Repeat", "Slow down")
 
-    data class DifficultyData(val name: String, val level: Int)
+    private var selectedMode: String = modeList[0]
 
+    private fun changeMode(view: View){
+        val index = modeList.indexOf(selectedMode)
+        val nextIndex = (index + 1) % 4
+        selectedMode = modeList[nextIndex]
+        view.mode.text = "Mode: ${selectedMode}"
+    }
+
+    data class DifficultyData(val name: String, val length: Int)
 
     private val listData: List<DifficultyData> = arrayListOf(
-        DifficultyData("Easy",1),
-        DifficultyData("Medium",2),
-        DifficultyData("Hard",3),
+        DifficultyData("Beginner",20),
+        DifficultyData("Warm up",20),
+        DifficultyData("Easy",20),
+        DifficultyData("Endurance",30),
+        DifficultyData("Strength",30),
+        DifficultyData("Power",30),
+        DifficultyData("Athlete",40),
+        DifficultyData("Pro Athlete",40),
+        DifficultyData("Superhuman",40),
+        DifficultyData("Conqueror",40),
     )
 
 
     private var selection: DifficultyData = listData[0]
 
+    private fun makeSpan(name: String): SpannableString {
+        val span = SpannableString(name)
+
+        if(selection.name != name){
+            span.setSpan(
+                ForegroundColorSpan(Color.GRAY),
+                0,
+                span.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        return span
+    }
 
     private fun renderList(view: View) {
-        val listItems = listData.map { SpannableString(it.name) }
+        val listItems = listData.map { makeSpan(it.name) }
 
         val adapter = ArrayAdapter(
             this.context,
@@ -74,7 +106,8 @@ class ClimbFragment : Fragment() {
         view.mylist.setOnItemClickListener { parent, view2, position, id ->
             selection = listData[position]
             view.difficulty.text = "Difficulty: ${selection.name}"
-            view.length.text = "Length: ${selection.level}"
+            view.length.text = "Length: ${selection.length}"
+            renderList(view)
         }
     }
 
