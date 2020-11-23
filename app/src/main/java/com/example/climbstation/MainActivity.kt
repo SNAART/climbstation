@@ -49,6 +49,10 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
 
+    fun startList(){
+        val intent = Intent(this, StatisticsListActivity::class.java)
+        startActivity(intent)
+    }
     private fun startApp(){
         setContentView(R.layout.activity_main)
 

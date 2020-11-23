@@ -1,11 +1,17 @@
 package com.example.climbstation.fragments
 
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.climbstation.MainActivity
+import com.example.climbstation.QRScanActivity
 import com.example.climbstation.R
+import com.example.climbstation.StatisticsListActivity
+import kotlinx.android.synthetic.main.fragment_statistics.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +41,18 @@ class StatisticsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistics, container, false)
+        val view = inflater.inflate(R.layout.fragment_statistics, container, false)
+
+        return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        activity.let {
+            btn_stats.setOnClickListener{
+                (activity as MainActivity?)!!.startList()
+            }
+        }
     }
 
     companion object {
