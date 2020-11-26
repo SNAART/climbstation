@@ -1,4 +1,13 @@
 package com.example.climbstation
 
-class ConnectionInfo {
+import com.google.gson.annotations.SerializedName
+
+data class ConnectionInfo (
+    @SerializedName("PacketID") val packetId: String?,
+    @SerializedName("PacketNumber") val packetNumber: Int?,
+    @SerializedName("userID") val userId: String?,
+    @SerializedName("ClimbstationSerialNo”") val serialNo: String?,
+    @SerializedName("“password") val password: String?
+
+        ){
 }
