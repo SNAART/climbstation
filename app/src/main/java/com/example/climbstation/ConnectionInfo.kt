@@ -7,7 +7,9 @@ data class ConnectionInfo (
     @SerializedName("PacketNumber") val packetNumber: Int?,
     @SerializedName("userID") val userId: String?,
     @SerializedName("ClimbstationSerialNo”") val serialNo: String?,
-    @SerializedName("“password") val password: String?
+    @SerializedName("password") val password: String?,
 
-        ){
-}
+    @SerializedName("Response") val response: String?,
+    @SerializedName("ClientKey") val clientKey: String?
+
+        )

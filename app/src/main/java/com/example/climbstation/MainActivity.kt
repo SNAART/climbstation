@@ -50,7 +50,10 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fl_wrapper,fragment)
             commit()
         }
-
+internal fun startList(){
+    val intent = Intent(this, TestThingy::class.java)
+    startActivity(intent)
+}
 
     private fun startApp(){
         setContentView(R.layout.activity_main)

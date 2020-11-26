@@ -28,30 +28,13 @@ class QRScanActivity: AppCompatActivity() {
              }
          }
         skip_button.setOnClickListener{
-            addDummyUser()
 
             startMain()
         }
 
      }
 
-    fun addDummyUser() {
-        val apiService = RestApiService()
-        val userInfo = ConnectionInfo(  packetId = "2a",
-            packetNumber = 1,
-            userId = "user",
-            serialNo = "xxxxx",
-            password = "climbstation" )
 
-        apiService.login(userInfo) {
-            if (it?.packetId != null) {
-                // it = newly added user parsed as response
-                // it?.id = newly added user ID
-            } else {
-                Log.d("E","Error registering new user")
-            }
-        }
-    }
 
 
      private fun scanQRCode() {
