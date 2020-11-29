@@ -5,34 +5,44 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.climbstation.retrofit.RestApiService
 import kotlinx.android.synthetic.main.activity_test.*
+import java.lang.Error
 
-class TestThingy: AppCompatActivity() {
+class TestThingy : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-        btn_test.setOnClickListener{
+        btn_test.setOnClickListener {
             addDummyUser()
 
         }
     }
+
     fun addDummyUser() {
         val apiService = RestApiService()
-        val userInfo = ConnectionInfo(  packetId = "2a",
-            packetNumber = 1,
-            userId = "user",
-            serialNo = "xxxxx",
-            password = "climbstation" ,
-            response = null,
-            clientKey = null)
+        val userInfo = ConnectionInfo(
+            "2a",
+            1,
+            "admin",
+            "20110001",
+            "CLIMBSTATION",
+            null,
+            null
+        )
 
         apiService.login(userInfo) {
-            if (it?.response != null) {
+            Log.d("hmm","pääseekö tääne")
+            if (it != null) {
                 // it = newly added user parsed as response
                 // it?.id = newly added user ID
-                Log.d("aa",it.toString())
+                Log.d("http", it.response)
             } else {
-                Log.d("E","Error")
+                Log.d("error", "Error registering new user")
+
+
+
             }
+
+
         }
     }
 }

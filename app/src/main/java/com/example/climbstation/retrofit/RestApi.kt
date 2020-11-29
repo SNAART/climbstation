@@ -10,4 +10,5 @@ interface RestApi {
     @Headers("Content-Type: application/json")
     @POST("login")
     fun login(@Body connectionData: ConnectionInfo): Call<ConnectionInfo>
+    
 }

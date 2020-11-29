@@ -12,4 +12,6 @@ data class ConnectionInfo (
     @SerializedName("Response") val response: String?,
     @SerializedName("ClientKey") val clientKey: String?
 
+
+
         )
