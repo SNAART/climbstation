@@ -1,11 +1,14 @@
 package com.example.climbstation.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.climbstation.CalibrationMenuActivity
 import com.example.climbstation.R
+import com.example.climbstation.SoundActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.fragment_settings.view.*
@@ -40,11 +43,17 @@ class SettingsFragment : Fragment() {
 
         val view = inflater!!.inflate(R.layout.fragment_settings, container, false)
 
-        view.tv_name.text = username
-        view.btn_log_out.setOnClickListener{
-            //have to refresh app
-            FirebaseAuth.getInstance().signOut();
+        view.sound.setOnClickListener{
+           val intent:Intent= Intent(context,SoundActivity::class.java)
+            startActivity(intent)
         }
+       view.calibration_menu.setOnClickListener{
+            val intent:Intent= Intent(context,CalibrationMenuActivity::class.java)
+            startActivity(intent)
+        }
+
+//        view.tv_name.text = username
+//
         return view
         // Inflate the layout for this fragment
     }
@@ -64,7 +73,7 @@ class SettingsFragment : Fragment() {
             SettingsFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param2)
-                    tv_name.text = username
+//                    tv_name.text = username
 
                 }
             }

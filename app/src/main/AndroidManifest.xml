@@ -16,7 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".SecurityActivity"></activity>
+        <activity android:name=".SoundActivity" />
+        <activity android:name=".CalibrationMenuActivity" />
+        <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".QRScanActivity" />
         <activity android:name=".MainActivity">
