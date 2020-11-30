@@ -8,16 +8,20 @@ import kotlinx.android.synthetic.main.activity_test.*
 import java.lang.Error
 
 class TestThingy : AppCompatActivity() {
+    var key: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
         btn_test.setOnClickListener {
-            addDummyUser()
+            login()
 
+        }
+        btn_test2.setOnClickListener {
+           operate()
         }
     }
 
-    fun addDummyUser() {
+    fun login() {
         val apiService = RestApiService()
         val userInfo = ConnectionInfo(
             "2a",
@@ -26,23 +30,59 @@ class TestThingy : AppCompatActivity() {
             "20110001",
             "CLIMBSTATION",
             null,
+            null,
+            null,
+            null,
+            null,
+            null,
             null
         )
 
         apiService.login(userInfo) {
-            Log.d("hmm","pääseekö tääne")
+            Log.d("hmm", "pääseekö tääne")
+            if (it != null) {
+                // it = newly added user parsed as response
+                // it?.id = newly added user ID
+              //  Log.d("http", it.toString())
+               // Log.d("http",it.clientKey)
+                key = it.clientKey.toString()
+                Log.d("http",it.response)
+            } else {
+                Log.d("error", "Error registering new user")
+            }
+        }
+    }
+
+    fun operate(){
+        val apiService = RestApiService()
+        val userInfo = ConnectionInfo(
+            "2c",
+            1,
+            null,
+            "20110001",
+            null,
+            null,
+            key,
+            null,
+            null,
+            null,
+            null,
+            "start"
+        )
+
+        apiService.operate(userInfo){
             if (it != null) {
                 // it = newly added user parsed as response
                 // it?.id = newly added user ID
                 Log.d("http", it.response)
+
             } else {
-                Log.d("error", "Error registering new user")
-
-
-
+                Log.d("error", "Error getting info")
             }
-
-
         }
+
     }
+
+
+
 }
