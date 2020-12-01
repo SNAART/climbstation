@@ -65,6 +65,25 @@ class RestApiService {
             }
         )
     }
+    fun setAngle(connectionData: ConnectionInfo, onResult: (ConnectionInfo?) -> Unit) {
+        retrofit.setAngle(connectionData).enqueue(
+            object : Callback<ConnectionInfo> {
+                override fun onResponse(
+                    call: Call<ConnectionInfo>,
+                    response: Response<ConnectionInfo>
+                ) {
+                    val addedUser = response.body()
+                    onResult(addedUser)
+                }
+
+                override fun onFailure(call: Call<ConnectionInfo>, t: Throwable) {
+                    onResult(null)
+                }
+
+            }
+        )
+    }
+
 
 
    }
