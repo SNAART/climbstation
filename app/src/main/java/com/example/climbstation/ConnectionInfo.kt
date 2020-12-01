@@ -20,7 +20,7 @@ data class ConnectionInfo (
 
     @SerializedName("Operation") val operation: String?,
 
-   // @SerializedName("Speed") val speed: String?
+    @SerializedName("Speed") val speed: Int?
 
 
 

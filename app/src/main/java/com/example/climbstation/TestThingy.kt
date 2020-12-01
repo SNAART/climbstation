@@ -9,6 +9,7 @@ import java.lang.Error
 
 class TestThingy : AppCompatActivity() {
     var key: String? = null
+    var speed :Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
@@ -29,6 +30,7 @@ class TestThingy : AppCompatActivity() {
             "admin",
             "20110001",
             "CLIMBSTATION",
+            null,
             null,
             null,
             null,
@@ -67,7 +69,8 @@ class TestThingy : AppCompatActivity() {
             null,
             null,
             null,
-            "start"
+            "start",
+            null
         )
 
         apiService.operate(userInfo){
@@ -83,6 +86,37 @@ class TestThingy : AppCompatActivity() {
 
     }
 
+    fun setSpeed(){
+        val apiService = RestApiService()
+        val userInfo = ConnectionInfo(
+            "2d",
+            1,
+            null,
+            "20110001",
+            null,
+            null,
+            key,
+            null,
+            null,
+            null,
+            null,
+            null,
+            speed
+
+        )
+
+        apiService.operate(userInfo){
+            if (it != null) {
+                // it = newly added user parsed as response
+                // it?.id = newly added user ID
+                Log.d("http", it.response)
+
+            } else {
+                Log.d("error", "Error getting info")
+            }
+        }
+
+    }
 
 
 }
