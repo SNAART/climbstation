@@ -17,5 +17,10 @@ interface RestApi {
     @POST("setspeed")
     fun setSpeed(@Body connectionData: ConnectionInfo): Call<ConnectionInfo>
 
+    @Headers("Content-Type: application/json")
+    @POST("setangle")
+    fun setAngle(@Body connectionData: ConnectionInfo): Call<ConnectionInfo>
+
+
 
 }
