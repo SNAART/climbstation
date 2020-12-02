@@ -84,6 +84,43 @@ class RestApiService {
         )
     }
 
+    fun logout(connectionData: ConnectionInfo, onResult: (ConnectionInfo?) -> Unit) {
+        retrofit.logout(connectionData).enqueue(
+            object : Callback<ConnectionInfo> {
+                override fun onResponse(
+                    call: Call<ConnectionInfo>,
+                    response: Response<ConnectionInfo>
+                ) {
+                    val addedUser = response.body()
+                    onResult(addedUser)
+                }
+
+                override fun onFailure(call: Call<ConnectionInfo>, t: Throwable) {
+                    onResult(null)
+                }
+
+            }
+        )
+    }
+
+    fun getInfo(connectionData: ConnectionInfo, onResult: (ConnectionInfo?) -> Unit) {
+        retrofit.getInfo(connectionData).enqueue(
+            object : Callback<ConnectionInfo> {
+                override fun onResponse(
+                    call: Call<ConnectionInfo>,
+                    response: Response<ConnectionInfo>
+                ) {
+                    val addedUser = response.body()
+                    onResult(addedUser)
+                }
+
+                override fun onFailure(call: Call<ConnectionInfo>, t: Throwable) {
+                    onResult(null)
+                }
+
+            }
+        )
+    }
 
 
    }
