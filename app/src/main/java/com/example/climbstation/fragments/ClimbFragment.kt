@@ -3,6 +3,7 @@ package com.example.climbstation.fragments
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
@@ -35,6 +36,10 @@ class ClimbFragment : Fragment() {
     private var param2: String? = null
     private var key: String? = null
     private var started = false
+    private lateinit var countDownTimer: CountDownTimer
+    private val initialCountDown: Long = 60000
+    private val countDownInterval: Long = 1000
+    private var millisecondsPassed: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +48,18 @@ class ClimbFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
+        countDownTimer = object: CountDownTimer(initialCountDown, countDownInterval){
+            override fun onTick(millisUntilFinished: Long) {
+                millisecondsPassed += countDownInterval
+                val timeLeft = millisUntilFinished / 1000
+                Log.d("asd", "onTick timeLeft: ${timeLeft}")
+                Log.d("asd", "millisecondsPassed: ${millisecondsPassed}")
+            }
+
+            override fun onFinish() {
+                Log.d("asd", "Timer has finished.")
+            }
+        }
         //renderList()
     }
 
@@ -127,9 +144,12 @@ class ClimbFragment : Fragment() {
                 if(it.response == "OK"){
                     started = !started
                     if (started) {
-                        //I should add a timer
+                        countDownTimer.start()
                         view.start_button.text = "Stop"
                     } else {
+                        countDownTimer.cancel()
+                        Log.d("asd", "Total climb time: ${millisecondsPassed / 1000} seconds")
+                        //TODO:calculate time duration and send to statistics
                         view.start_button.text = "Start"
                     }
                 }
