@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "41459261921",
-    "project_id": "climbstation-e6eac",
-    "storage_bucket": "climbstation-e6eac.appspot.com"
+    "project_number": "740157176160",
+    "project_id": "climbstationdb",
+    "storage_bucket": "climbstationdb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:41459261921:android:ac0f94bef66c859b0ab2a0",
+        "mobilesdk_app_id": "1:740157176160:android:58bc2f6f9b58e894d10605",
         "android_client_info": {
           "package_name": "com.example.climbstation"
         }
       },
       "oauth_client": [
         {
-          "client_id": "41459261921-p95789n0af67liu3mr0g1ghjqhp3pohc.apps.googleusercontent.com",
+          "client_id": "740157176160-33u8khdle2poe91b504mkrnf33gcise5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAAu7YD4HUi8td-zooU3osXpWLZbSnDroo"
+          "current_key": "AIzaSyDnOpB3aRubfTCv_hyhUF71rzbnqntT9MI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "41459261921-p95789n0af67liu3mr0g1ghjqhp3pohc.apps.googleusercontent.com",
+              "client_id": "740157176160-33u8khdle2poe91b504mkrnf33gcise5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
