@@ -11,8 +11,6 @@ import kotlinx.android.synthetic.main.activity_sound.*
 
 class SoundActivity : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sound)
