@@ -37,9 +37,21 @@ class ClimbFragment : Fragment() {
     private var key: String? = null
     private var started = false
     private lateinit var countDownTimer: CountDownTimer
-    private val initialCountDown: Long = 60000
+    private lateinit var phaseTimer: CountDownTimer
+    private val initialCountDown: Long = 6000000
     private val countDownInterval: Long = 1000
     private var millisecondsPassed: Long = 0
+
+    private var climbingPhase: Int = 0
+
+    private var speedMMperSecond: Int = 200
+    private fun calculateTime(MMspeed: Int, distance: Int)  : Int{
+        // time = disance / speed
+        val mm = distance * 1000
+        var time = mm / MMspeed
+        Log.d("asd", "Calculate : MMspeedpersec ${MMspeed}, distance: ${mm}, result ${time}")
+        return time
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +63,10 @@ class ClimbFragment : Fragment() {
         countDownTimer = object: CountDownTimer(initialCountDown, countDownInterval){
             override fun onTick(millisUntilFinished: Long) {
                 millisecondsPassed += countDownInterval
+
                 val timeLeft = millisUntilFinished / 1000
-                Log.d("asd", "onTick timeLeft: ${timeLeft}")
-                Log.d("asd", "millisecondsPassed: ${millisecondsPassed}")
+                // Log.d("asd", "onTick timeLeft: ${timeLeft}")
+                // Log.d("asd", "millisecondsPassed: ${millisecondsPassed}")
             }
 
             override fun onFinish() {
@@ -61,6 +74,47 @@ class ClimbFragment : Fragment() {
             }
         }
         //renderList()
+    }
+
+    private fun setPhaseTimer(view: View) {
+        val distance = selection.climbingPhases[climbingPhase].distance
+        val phaseTime: Long = calculateTime(speedMMperSecond, distance).toLong()
+
+        Log.d("asd", "Setting phase timer ${climbingPhase} time: ${phaseTime} seconds")
+
+        // set angle
+        val angle = selection.climbingPhases[climbingPhase].angle
+        setAngle(angle)
+
+        // start timer for end of phase
+        phaseTimer = object : CountDownTimer(phaseTime * 1000, countDownInterval) {
+            override fun onTick(millisUntilFinished: Long) {
+            }
+
+            override fun onFinish() {
+                val phases = selection.climbingPhases;
+                // IS THE CURRENT INDEX THE LAST IN THE LIST?? index 2  == size 3
+                val lastIndex = phases.size - 1;
+                val currentIndex = climbingPhase;
+                if (currentIndex == lastIndex) {
+                    // stop the run
+                    Log.d("asd", "Phase timer finished, stopping climb")
+                    operate(view)
+                } else {
+                    //start the next phase
+                    Log.d("asd", "Phase timer finished, starting next phase")
+                    climbingPhase = climbingPhase + 1
+                    setPhaseTimer(view)
+
+                }
+            }
+        }
+        phaseTimer.start()
+    }
+
+    private fun setAngle(angle: Int) {
+        // TODO SET ANGLE
+        Log.d("asd", "Setting wall angle ${angle}")
     }
 
     override fun onCreateView(
@@ -141,11 +195,13 @@ class ClimbFragment : Fragment() {
                 // it = newly added user parsed as response
                 // it?.id = newly added user ID
                 Log.d("asd", "start response ${it.response}")
-                if(it.response == "OK"){
+                if(it.response == "OK" || true){
                     started = !started
                     if (started) {
                         countDownTimer.start()
                         view.start_button.text = "Stop"
+                        climbingPhase = 0
+                        setPhaseTimer(view)
                     } else {
                         countDownTimer.cancel()
                         Log.d("asd", "Total climb time: ${millisecondsPassed / 1000} seconds")
@@ -172,19 +228,89 @@ class ClimbFragment : Fragment() {
         view.mode.text = "Mode: ${selectedMode}"
     }
 
-    data class DifficultyData(val name: String, val length: Int)
+    data class AngleChange(val distance: Int, val angle: Int);
+    data class DifficultyData(
+        val name: String,
+        val length: Int,
+        val climbingPhases: List<AngleChange>)
 
     private val listData: List<DifficultyData> = arrayListOf(
-        DifficultyData("Beginner",20),
-        DifficultyData("Warm up",20),
-        DifficultyData("Easy",20),
-        DifficultyData("Endurance",30),
-        DifficultyData("Strength",30),
-        DifficultyData("Power",30),
-        DifficultyData("Athlete",40),
-        DifficultyData("Pro Athlete",40),
-        DifficultyData("Superhuman",40),
-        DifficultyData("Conqueror",40),
+        DifficultyData(
+            "Beginner",
+            20,
+            listOf(
+                AngleChange(6, 15),
+                AngleChange(2, 12),
+                AngleChange(6, 10),
+                AngleChange(2, 5),
+                AngleChange(4, 15),
+            )
+        ),
+        DifficultyData(
+            "Warm up",
+            20,
+            listOf(
+                AngleChange(2, 15),
+                AngleChange(2, 5),
+                AngleChange(2, 10),
+                AngleChange(2, 5),
+                AngleChange(2, 12),
+                AngleChange(2, 10),
+                AngleChange(2, 15),
+                AngleChange(2, 0),
+                AngleChange(2, 5),
+                AngleChange(2, 15),
+            )),
+        DifficultyData(
+            "Easy",
+            20,
+            listOf(
+                AngleChange(2, 15),
+                AngleChange(2, 0),
+                AngleChange(2, 5),
+                AngleChange(2, 0),
+                AngleChange(2, 5),
+                AngleChange(2, 12),
+                AngleChange(2, -3),
+                AngleChange(2, 3),
+                AngleChange(2, 10),
+                AngleChange(2, 12),
+
+            )),
+        DifficultyData(
+            "Endurance",
+            30,
+            listOf(
+                AngleChange(3, 10),
+                AngleChange(3, -4),
+                AngleChange(3, 0),
+                AngleChange(3, 3),
+                AngleChange(6, -5),
+                AngleChange(3, 5),
+                AngleChange(3, -10),
+                AngleChange(3, 2),
+                AngleChange(3, 10),
+            )),
+        DifficultyData(
+            "Strength",
+            30,
+            listOf(
+                AngleChange(3, 10),
+                AngleChange(3, -6),
+                AngleChange(3, -2),
+                AngleChange(3, 5),
+                AngleChange(3, -8),
+                AngleChange(3, 0),
+                AngleChange(3, -10),
+                AngleChange(3, 8),
+                AngleChange(3, -15),
+                AngleChange(3, 5),
+            )),
+        DifficultyData("Power",30, listOf()),
+        DifficultyData("Athlete",40, listOf()),
+        DifficultyData("Pro Athlete",40, listOf()),
+        DifficultyData("Superhuman",40, listOf()),
+        DifficultyData("Conqueror",40, listOf()),
     )
 
 
