@@ -6,9 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.climbstation.CalibrationMenuActivity
-import com.example.climbstation.R
-import com.example.climbstation.SoundActivity
+import com.example.climbstation.*
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.fragment_settings.view.*
@@ -44,11 +42,20 @@ class SettingsFragment : Fragment() {
         val view = inflater!!.inflate(R.layout.fragment_settings, container, false)
 
         view.sound.setOnClickListener{
-           val intent:Intent= Intent(context,SoundActivity::class.java)
+            val intent:Intent= Intent(context,SoundActivity::class.java)
             startActivity(intent)
         }
-       view.calibration_menu.setOnClickListener{
+        view.calibration_menu.setOnClickListener{
             val intent:Intent= Intent(context,CalibrationMenuActivity::class.java)
+            startActivity(intent)
+        }
+        view.btn_Owner_menu.setOnClickListener{
+            val intent:Intent= Intent(context,OwnersMenuActivity::class.java)
+            startActivity(intent)
+        }
+
+        view.btn_security.setOnClickListener{
+            val intent:Intent= Intent(context,SecurityActivity::class.java)
             startActivity(intent)
         }
 

@@ -3,12 +3,14 @@ package com.example.climbstation
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.example.climbstation.fragments.ClimbFragment
 import com.example.climbstation.fragments.CreateFragment
 import com.example.climbstation.fragments.SettingsFragment
 import com.example.climbstation.fragments.StatisticsFragment
+import com.example.climbstation.retrofit.RestApiService
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.login.*
 import com.google.firebase.auth.FirebaseAuth
@@ -48,6 +50,10 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fl_wrapper,fragment)
             commit()
         }
+internal fun startList(){
+    val intent = Intent(this, TestThingy::class.java)
+    startActivity(intent)
+}
 
     private fun startApp(){
         setContentView(R.layout.activity_main)
@@ -58,6 +64,8 @@ class MainActivity : AppCompatActivity() {
             // intent.putExtra("User", user);
             startActivity(intent)
         }*/
+
+
 
         bottom_navigation_menu.setOnNavigationItemSelectedListener {
             when (it.itemId){

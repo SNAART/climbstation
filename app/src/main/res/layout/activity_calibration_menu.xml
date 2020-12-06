@@ -26,12 +26,14 @@
             android:text="Calibiration Distance"/>
 
         <EditText
+            android:padding="5dp"
+            android:background="@drawable/box_edit_text"
             android:layout_toLeftOf="@+id/scale"
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
             android:textSize="18sp"
             android:layout_height="wrap_content"
-            android:text="x.xx"/>
+            android:text="3.65"/>
         <TextView
             android:layout_marginLeft="10dp"
             android:id="@+id/scale"
@@ -114,8 +116,10 @@
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
             android:textSize="18sp"
+            android:padding="5dp"
+            android:background="@drawable/box_edit_text"
             android:layout_height="wrap_content"
-            android:text="x.xx"/>
+            android:text="50"/>
         <TextView
             android:layout_marginLeft="10dp"
             android:id="@+id/cal_scale"

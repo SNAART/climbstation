@@ -2,8 +2,10 @@ package com.example.climbstation
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.climbstation.retrofit.RestApiService
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeView
 import com.journeyapps.barcodescanner.CaptureActivity
@@ -26,10 +28,13 @@ class QRScanActivity: AppCompatActivity() {
              }
          }
         skip_button.setOnClickListener{
+
             startMain()
         }
 
      }
+
+
 
 
      private fun scanQRCode() {
