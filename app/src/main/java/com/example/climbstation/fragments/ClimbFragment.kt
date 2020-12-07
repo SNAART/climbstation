@@ -18,6 +18,9 @@ import com.example.climbstation.R
 import com.example.climbstation.retrofit.RestApiService
 import kotlinx.android.synthetic.main.fragment_climb.*
 import kotlinx.android.synthetic.main.fragment_climb.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlin.concurrent.timer
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,6 +34,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ClimbFragment : Fragment() {
+    private var restApiService = RestApiService()
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -73,7 +77,6 @@ class ClimbFragment : Fragment() {
                 Log.d("asd", "Timer has finished.")
             }
         }
-        //renderList()
     }
 
     private fun setPhaseTimer(view: View) {
@@ -113,8 +116,55 @@ class ClimbFragment : Fragment() {
     }
 
     private fun setAngle(angle: Int) {
-        // TODO SET ANGLE
         Log.d("asd", "Setting wall angle ${angle}")
+        val angleInfo = ConnectionInfo(
+            "2c",
+            1,
+            null,
+            "20110001",
+            null,
+            null,
+            key,
+            null,
+            null,
+            angle.toString(),
+            null,
+            null,
+            null
+        )
+        restApiService.setAngle(angleInfo) {
+            if (it?.response == "OK") {
+                Log.d("asd", "Angle set successfully")
+            } else {
+                Log.d("asd", "Angle was not set successfully")
+            }
+        }
+    }
+
+    private fun setSpeed(speed: Int) {
+        Log.d("asd", "Setting wall speed ${speed}")
+        val speedInfo = ConnectionInfo(
+            "2c",
+            1,
+            null,
+            "20110001",
+            null,
+            null,
+            key,
+            null,
+            speed.toString(),
+            null,
+            null,
+            null,
+            null,
+        )
+        restApiService.setSpeed(speedInfo) {
+            if (it?.response == "OK") {
+                Log.d("asd", "Speed set successfully")
+            } else {
+                Log.d("asd", "Speed was not set successfully")
+            }
+        }
     }
 
     override fun onCreateView(
@@ -136,7 +186,6 @@ class ClimbFragment : Fragment() {
     }
 
     fun login() {
-        val apiService = RestApiService()
         val userInfo = ConnectionInfo(
             "2a",
             1,
@@ -153,7 +202,7 @@ class ClimbFragment : Fragment() {
             null
         )
 
-        apiService.login(userInfo) {
+        restApiService.login(userInfo) {
             Log.d("asd", "pääseekö tääne")
             if (it != null) {
                 // it = newly added user parsed as response
@@ -169,7 +218,6 @@ class ClimbFragment : Fragment() {
     }
 
     fun operate(view: View){
-        val apiService = RestApiService()
         var operation: String = "start"
         if (started == true){
             operation = "stop"
@@ -190,7 +238,7 @@ class ClimbFragment : Fragment() {
             null
         )
 
-        apiService.operate(userInfo){
+        restApiService.operate(userInfo){
             if (it != null) {
                 // it = newly added user parsed as response
                 // it?.id = newly added user ID
@@ -198,6 +246,7 @@ class ClimbFragment : Fragment() {
                 if(it.response == "OK" || true){
                     started = !started
                     if (started) {
+                        setSpeed(speedMMperSecond)
                         countDownTimer.start()
                         view.start_button.text = "Stop"
                         climbingPhase = 0
