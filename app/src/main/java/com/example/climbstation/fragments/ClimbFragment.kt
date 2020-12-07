@@ -247,6 +247,8 @@ class ClimbFragment : Fragment() {
                 // it = newly added user parsed as response
                 // it?.id = newly added user ID
                 Log.d("asd", "start response ${it.response}")
+
+                // the "|| true" part below is to make testing easier, maybe remove when server always works
                 if(it.response == "OK" || true){
                     started = !started
                     if (started) {
