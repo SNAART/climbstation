@@ -37,6 +37,7 @@ class TestThingy : AppCompatActivity() {
             null,
             null,
             null,
+            null,
             null
         )
 
@@ -70,6 +71,7 @@ class TestThingy : AppCompatActivity() {
             null,
             null,
             "start",
+            null,
             null
         )
 
@@ -101,7 +103,8 @@ class TestThingy : AppCompatActivity() {
             null,
             null,
             null,
-            speed
+            speed,
+            null
 
         )
 

@@ -127,10 +127,11 @@ class ClimbFragment : Fragment() {
             key,
             null,
             null,
-            angle.toString(),
             null,
             null,
-            null
+            null,
+            null,
+            angle
         )
         restApiService.setAngle(angleInfo) {
             if (it?.response == "OK") {
@@ -152,11 +153,12 @@ class ClimbFragment : Fragment() {
             null,
             key,
             null,
-            speed.toString(),
             null,
             null,
             null,
             null,
+            speed,
+            null
         )
         restApiService.setSpeed(speedInfo) {
             if (it?.response == "OK") {
@@ -192,6 +194,7 @@ class ClimbFragment : Fragment() {
             "admin",
             "20110001",
             "CLIMBSTATION",
+            null,
             null,
             null,
             null,
@@ -235,6 +238,7 @@ class ClimbFragment : Fragment() {
             null,
             null,
             operation,
+            null,
             null
         )
 
