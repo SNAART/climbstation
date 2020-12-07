@@ -1,7 +1,10 @@
 package com.example.climbstation
 
+import java.util.*
+
 data class ClimbData(
-    var climbList: ArrayList<ClimbItem> = arrayListOf()
+   // var climbList: ArrayList<ClimbItem> = arrayListOf()
+    var climbList: MutableList<ClimbItem> = java.util.ArrayList()
 )
 
 data class ClimbItem(
@@ -10,5 +13,5 @@ data class ClimbItem(
     var difficulty: String? = null,
     var lenght: String? = null,
     var avgSpeed: String? = null,
-    var date : String? = null
+    var date : Date? = null
 )

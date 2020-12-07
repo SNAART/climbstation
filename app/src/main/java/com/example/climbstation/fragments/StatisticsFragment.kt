@@ -1,6 +1,8 @@
 package com.example.climbstation.fragments
 
 import android.content.ContentValues.TAG
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +12,7 @@ import android.view.ViewGroup
 import com.example.climbstation.ClimbData
 import com.example.climbstation.MainActivity
 import com.example.climbstation.R
+import com.example.climbstation.TestThingy
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -32,7 +35,6 @@ class StatisticsFragment : Fragment() {
     private var param2: String? = null
 
     var db = FirebaseFirestore.getInstance()
-    // lateinit var auth: FirebaseAuth
 
 
 
@@ -53,21 +55,26 @@ class StatisticsFragment : Fragment() {
 
     return view
     }
-
+/*
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-      /*  auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser.toString()
-       */
 
+/*
         btn_stats.setOnClickListener {
            // Log.d("fb",currentUser)
-            getLatestData( )
+           // getLatestData( )
+
         }
+
+ */
 
     }
 
-    fun getLatestData() {
+ */
+
+
+
+    private fun getLatestData() {
         Log.d("fb","getdata started")
         db.collection("climb_data")
             .whereEqualTo("email", "rasmus.karling@gmail.com") //user email here
@@ -91,11 +98,11 @@ class StatisticsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-      /*  activity.let {
+        activity.let {
             btn_stats.setOnClickListener{
                 (activity as MainActivity?)!!.startList()
             }
-        } */
+        }
 
     }
 

@@ -20,18 +20,24 @@
 
         <activity android:name=".SignupActivity"/>
         <activity android:name=".TestThingy"/>
+
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
 
-        <activity android:name=".SecurityActivity"></activity>
+
+        <activity android:name=".SecurityActivity" />
         <activity android:name=".SoundActivity" />
         <activity android:name=".CalibrationMenuActivity" />
 
+
         <activity android:name=".LoginActivity" />
         <activity android:name=".QRScanActivity" />
+        <activity android:name=".StatisticsListActivity"/>
         <activity android:name=".MainActivity">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
