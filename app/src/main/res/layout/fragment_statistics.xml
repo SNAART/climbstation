@@ -33,6 +33,7 @@
             android:text="@string/stat_main" />
 
         <TextView
+            android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -43,6 +44,7 @@
             android:text="@string/stat_time" />
 
         <TextView
+            android:id="@+id/tv_difficulty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -53,6 +55,7 @@
             android:text="@string/stat_difficulty" />
 
         <TextView
+            android:id="@+id/tv_lenght"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -63,6 +66,7 @@
             android:text="@string/stat_lenght" />
 
         <TextView
+            android:id="@+id/tv_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -83,6 +87,7 @@
             android:text="@string/stat_cal" />
 
         <TextView
+            android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
