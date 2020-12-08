@@ -2,10 +2,11 @@ package com.example.climbstation
 
 import java.util.*
 
-data class ClimbData(
+/*data class ClimbData(
    // var climbList: ArrayList<ClimbItem> = arrayListOf()
     var climbList: MutableList<ClimbItem> = java.util.ArrayList()
 )
+ */
 
 data class ClimbItem(
     var email: String? = null,
