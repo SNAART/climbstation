@@ -4,7 +4,6 @@
     package="com.example.climbstation">
 
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <uses-feature android:name="android.hardware.camera" />
@@ -20,6 +19,7 @@
 
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".PasswordActivity"></activity>
         <activity android:name=".OwnersMenuActivity" />
         <activity android:name=".AuthActivity" />
@@ -33,7 +33,6 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".TestThingy" />
 
-        android:theme="@style/AppTheme">
 
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
@@ -44,10 +43,16 @@
         <activity android:name=".SoundActivity" />
         <activity android:name=".CalibrationMenuActivity" />
 
+
         <activity android:name=".LoginActivity" />
         <activity android:name=".QRScanActivity" />
+        <activity android:name=".StatisticsListActivity"/>
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".CaptureActivity"
