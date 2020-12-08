@@ -20,7 +20,11 @@ data class ConnectionInfo (
 
     @SerializedName("Operation") val operation: String?,
 
+<<<<<<< Updated upstream
     @SerializedName("Speed") val speed: Int?
+=======
+    @SerializedName("Speed") val speed: String?
+>>>>>>> Stashed changes
 
 
 

@@ -101,7 +101,11 @@ class TestThingy : AppCompatActivity() {
             null,
             null,
             null,
+<<<<<<< Updated upstream
             speed
+=======
+            null
+>>>>>>> Stashed changes
 
         )
 

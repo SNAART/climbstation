@@ -4,8 +4,12 @@
     package="com.example.climbstation">
 
     <uses-permission android:name="android.permission.CAMERA" />
+<<<<<<< Updated upstream
 
     <uses-permission android:name="android.permission.INTERNET"/>
+=======
+    <uses-permission android:name="android.permission.INTERNET" />
+>>>>>>> Stashed changes
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -20,7 +24,12 @@
 
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+<<<<<<< Updated upstream
         <activity android:name=".PasswordActivity"></activity>
+=======
+        <activity android:name=".EditTerrins"></activity>
+        <activity android:name=".PasswordActivity" />
+>>>>>>> Stashed changes
         <activity android:name=".OwnersMenuActivity" />
         <activity android:name=".AuthActivity" />
         <activity android:name=".SplashScreen" >
@@ -32,9 +41,12 @@
         </activity>
         <activity android:name=".SignupActivity" />
         <activity android:name=".TestThingy" />
+<<<<<<< Updated upstream
 
         android:theme="@style/AppTheme">
 
+=======
+>>>>>>> Stashed changes
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
@@ -43,12 +55,18 @@
         <activity android:name=".SecurityActivity" />
         <activity android:name=".SoundActivity" />
         <activity android:name=".CalibrationMenuActivity" />
+<<<<<<< Updated upstream
 
         <activity android:name=".LoginActivity" />
         <activity android:name=".QRScanActivity" />
         <activity android:name=".MainActivity">
 
         </activity>
+=======
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".QRScanActivity" />
+        <activity android:name=".MainActivity"></activity>
+>>>>>>> Stashed changes
         <activity
             android:name=".CaptureActivity"
             android:screenOrientation="fullSensor"
