@@ -25,6 +25,7 @@
 
 
         <Switch
+            android:id="@+id/restore_angle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/txt_restore" />
@@ -37,6 +38,14 @@
             android:text="restore"
             android:textSize="18sp"
 
+            />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txt_restore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Continue last position"
             />
     </RelativeLayout>
 
@@ -155,36 +164,6 @@
             android:text="user@gmail.com" />
     </androidx.cardview.widget.CardView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sound_logo"
-        android:layout_marginTop="20dp"
-        tools:ignore="UseSwitchCompatOrMaterialXml">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Continue he last Position "
-            android:textSize="18sp"
-
-            />
-
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/txt_mute" />
-
-        <TextView
-            android:id="@+id/txt_mute"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="ON"
-            android:textSize="18sp"
-
-            />
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.example.climbstation
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -49,13 +50,18 @@ class TestThingy : AppCompatActivity() {
               //  Log.d("http", it.toString())
                // Log.d("http",it.clientKey)
                 key = it.clientKey.toString()
-                Log.d("http",it.response)
+                saveText("client_key", key!!)
             } else {
                 Log.d("error", "Error registering new user")
             }
         }
     }
-
+    fun saveText(key: String, value: String) {
+        val spassword: SharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = spassword.edit()
+        editor.putString(key, value)
+        editor.apply()
+    }
     fun operate(){
         val apiService = RestApiService()
         val userInfo = ConnectionInfo(

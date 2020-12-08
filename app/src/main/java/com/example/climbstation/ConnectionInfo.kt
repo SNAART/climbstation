@@ -14,8 +14,8 @@ data class ConnectionInfo (
 
     @SerializedName("ClimbingData") val climbingData: String?,
 
-    @SerializedName("SpeedNow") val speedNow: String?,
-    @SerializedName("AngleNow") val angleNow: String?,
+    @SerializedName("speed") val speedNow: String?,
+    @SerializedName("angle") val angleNow: String?,
     @SerializedName("Lenght") val length: String?,
 
     @SerializedName("Operation") val operation: String?,
@@ -23,7 +23,6 @@ data class ConnectionInfo (
     @SerializedName("Speed") val speed: Int?,
 
     @SerializedName("Angle") val angle: Int?
-
 
 
 
