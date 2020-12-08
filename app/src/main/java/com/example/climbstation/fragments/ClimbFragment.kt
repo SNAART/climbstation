@@ -18,6 +18,9 @@ import com.example.climbstation.R
 import com.example.climbstation.retrofit.RestApiService
 import kotlinx.android.synthetic.main.fragment_climb.*
 import kotlinx.android.synthetic.main.fragment_climb.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlin.concurrent.timer
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,15 +34,28 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ClimbFragment : Fragment() {
+    private var restApiService = RestApiService()
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var key: String? = null
     private var started = false
     private lateinit var countDownTimer: CountDownTimer
-    private val initialCountDown: Long = 60000
+    private lateinit var phaseTimer: CountDownTimer
+    private val initialCountDown: Long = 6000000
     private val countDownInterval: Long = 1000
     private var millisecondsPassed: Long = 0
+
+    private var climbingPhase: Int = 0
+
+    private var speedMMperSecond: Int = 200
+    private fun calculateTime(MMspeed: Int, distance: Int)  : Int{
+        // time = disance / speed
+        val mm = distance * 1000
+        var time = mm / MMspeed
+        Log.d("asd", "Calculate : MMspeedpersec ${MMspeed}, distance: ${mm}, result ${time}")
+        return time
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,16 +67,106 @@ class ClimbFragment : Fragment() {
         countDownTimer = object: CountDownTimer(initialCountDown, countDownInterval){
             override fun onTick(millisUntilFinished: Long) {
                 millisecondsPassed += countDownInterval
+
                 val timeLeft = millisUntilFinished / 1000
-                Log.d("asd", "onTick timeLeft: ${timeLeft}")
-                Log.d("asd", "millisecondsPassed: ${millisecondsPassed}")
+                // Log.d("asd", "onTick timeLeft: ${timeLeft}")
+                // Log.d("asd", "millisecondsPassed: ${millisecondsPassed}")
             }
 
             override fun onFinish() {
                 Log.d("asd", "Timer has finished.")
             }
         }
-        //renderList()
+    }
+
+    private fun setPhaseTimer(view: View) {
+        val distance = selection.climbingPhases[climbingPhase].distance
+        val phaseTime: Long = calculateTime(speedMMperSecond, distance).toLong()
+
+        Log.d("asd", "Setting phase timer ${climbingPhase} time: ${phaseTime} seconds")
+
+        // set angle
+        val angle = selection.climbingPhases[climbingPhase].angle
+        setAngle(angle)
+
+        // start timer for end of phase
+        phaseTimer = object : CountDownTimer(phaseTime * 1000, countDownInterval) {
+            override fun onTick(millisUntilFinished: Long) {
+            }
+
+            override fun onFinish() {
+                val phases = selection.climbingPhases;
+                // IS THE CURRENT INDEX THE LAST IN THE LIST?? index 2  == size 3
+                val lastIndex = phases.size - 1;
+                val currentIndex = climbingPhase;
+                if (currentIndex == lastIndex) {
+                    // stop the run
+                    Log.d("asd", "Phase timer finished, stopping climb")
+                    operate(view)
+                } else {
+                    //start the next phase
+                    Log.d("asd", "Phase timer finished, starting next phase")
+                    climbingPhase = climbingPhase + 1
+                    setPhaseTimer(view)
+
+                }
+            }
+        }
+        phaseTimer.start()
+    }
+
+    private fun setAngle(angle: Int) {
+        Log.d("asd", "Setting wall angle ${angle}")
+        val angleInfo = ConnectionInfo(
+            "2c",
+            1,
+            null,
+            "20110001",
+            null,
+            null,
+            key,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            angle
+        )
+        restApiService.setAngle(angleInfo) {
+            if (it?.response == "OK") {
+                Log.d("asd", "Angle set successfully")
+            } else {
+                Log.d("asd", "Angle was not set successfully")
+            }
+        }
+    }
+
+    private fun setSpeed(speed: Int) {
+        Log.d("asd", "Setting wall speed ${speed}")
+        val speedInfo = ConnectionInfo(
+            "2c",
+            1,
+            null,
+            "20110001",
+            null,
+            null,
+            key,
+            null,
+            null,
+            null,
+            null,
+            null,
+            speed,
+            null
+        )
+        restApiService.setSpeed(speedInfo) {
+            if (it?.response == "OK") {
+                Log.d("asd", "Speed set successfully")
+            } else {
+                Log.d("asd", "Speed was not set successfully")
+            }
+        }
     }
 
     override fun onCreateView(
@@ -82,7 +188,6 @@ class ClimbFragment : Fragment() {
     }
 
     fun login() {
-        val apiService = RestApiService()
         val userInfo = ConnectionInfo(
             "2a",
             1,
@@ -96,10 +201,11 @@ class ClimbFragment : Fragment() {
             null,
             null,
             null,
+            null,
             null
         )
 
-        apiService.login(userInfo) {
+        restApiService.login(userInfo) {
             Log.d("asd", "pääseekö tääne")
             if (it != null) {
                 // it = newly added user parsed as response
@@ -115,7 +221,6 @@ class ClimbFragment : Fragment() {
     }
 
     fun operate(view: View){
-        val apiService = RestApiService()
         var operation: String = "start"
         if (started == true){
             operation = "stop"
@@ -133,19 +238,25 @@ class ClimbFragment : Fragment() {
             null,
             null,
             operation,
+            null,
             null
         )
 
-        apiService.operate(userInfo){
+        restApiService.operate(userInfo){
             if (it != null) {
                 // it = newly added user parsed as response
                 // it?.id = newly added user ID
                 Log.d("asd", "start response ${it.response}")
-                if(it.response == "OK"){
+
+                // the "|| true" part below is to make testing easier, maybe remove when server always works
+                if(it.response == "OK" || true){
                     started = !started
                     if (started) {
+                        setSpeed(speedMMperSecond)
                         countDownTimer.start()
                         view.start_button.text = "Stop"
+                        climbingPhase = 0
+                        setPhaseTimer(view)
                     } else {
                         countDownTimer.cancel()
                         Log.d("asd", "Total climb time: ${millisecondsPassed / 1000} seconds")
@@ -172,19 +283,161 @@ class ClimbFragment : Fragment() {
         view.mode.text = "Mode: ${selectedMode}"
     }
 
-    data class DifficultyData(val name: String, val length: Int)
+    data class AngleChange(val distance: Int, val angle: Int);
+    data class DifficultyData(
+        val name: String,
+        val length: Int,
+        val climbingPhases: List<AngleChange>)
 
     private val listData: List<DifficultyData> = arrayListOf(
-        DifficultyData("Beginner",20),
-        DifficultyData("Warm up",20),
-        DifficultyData("Easy",20),
-        DifficultyData("Endurance",30),
-        DifficultyData("Strength",30),
-        DifficultyData("Power",30),
-        DifficultyData("Athlete",40),
-        DifficultyData("Pro Athlete",40),
-        DifficultyData("Superhuman",40),
-        DifficultyData("Conqueror",40),
+        DifficultyData(
+            "Beginner",
+            20,
+            listOf(
+                AngleChange(6, 15),
+                AngleChange(2, 12),
+                AngleChange(6, 10),
+                AngleChange(2, 5),
+                AngleChange(4, 15),
+            )
+        ),
+        DifficultyData(
+            "Warm up",
+            20,
+            listOf(
+                AngleChange(2, 15),
+                AngleChange(2, 5),
+                AngleChange(2, 10),
+                AngleChange(2, 5),
+                AngleChange(2, 12),
+                AngleChange(2, 10),
+                AngleChange(2, 15),
+                AngleChange(2, 0),
+                AngleChange(2, 5),
+                AngleChange(2, 15),
+            )),
+        DifficultyData(
+            "Easy",
+            20,
+            listOf(
+                AngleChange(2, 15),
+                AngleChange(2, 0),
+                AngleChange(2, 5),
+                AngleChange(2, 0),
+                AngleChange(2, 5),
+                AngleChange(2, 12),
+                AngleChange(2, -3),
+                AngleChange(2, 3),
+                AngleChange(2, 10),
+                AngleChange(2, 12),
+
+            )),
+        DifficultyData(
+            "Endurance",
+            30,
+            listOf(
+                AngleChange(3, 10),
+                AngleChange(3, -4),
+                AngleChange(3, 0),
+                AngleChange(3, 3),
+                AngleChange(6, -5),
+                AngleChange(3, 5),
+                AngleChange(3, -10),
+                AngleChange(3, 2),
+                AngleChange(3, 10),
+            )),
+        DifficultyData(
+            "Strength",
+            30,
+            listOf(
+                AngleChange(3, 10),
+                AngleChange(3, -6),
+                AngleChange(3, -2),
+                AngleChange(3, 5),
+                AngleChange(3, -8),
+                AngleChange(3, 0),
+                AngleChange(3, -10),
+                AngleChange(3, 8),
+                AngleChange(3, -15),
+                AngleChange(3, 5),
+            )),
+        DifficultyData(
+            "Power",
+            30,
+            listOf(
+                AngleChange(3, 5),
+                AngleChange(3, -10),
+                AngleChange(3, -5),
+                AngleChange(3, 10),
+                AngleChange(3, 8),
+                AngleChange(3, -15),
+                AngleChange(3, 7),
+                AngleChange(3, -15),
+                AngleChange(3, 4),
+                AngleChange(3, 10),
+                AngleChange(3, -18),
+                AngleChange(3, -5),
+            )),
+        DifficultyData(
+            "Athlete",
+            40,
+            listOf(
+                AngleChange(4, 5),
+                AngleChange(4, -15),
+                AngleChange(4, -10),
+                AngleChange(4, 5),
+                AngleChange(4, -12),
+                AngleChange(4, -20),
+                AngleChange(4, 3),
+                AngleChange(4, -25),
+                AngleChange(4, -5),
+                AngleChange(4, -10),
+            )),
+        DifficultyData(
+            "Pro Athlete",
+            40,
+            listOf(
+                AngleChange(4, 5),
+                AngleChange(4, -22),
+                AngleChange(4, 7),
+                AngleChange(4, -30),
+                AngleChange(4, 5),
+                AngleChange(4, -33),
+                AngleChange(4, 8),
+                AngleChange(4, -22),
+                AngleChange(4, 0),
+                AngleChange(4, -25),
+            )),
+        DifficultyData(
+            "Superhuman",
+            40,
+            listOf(
+                AngleChange(4, 0),
+                AngleChange(4, -40),
+                AngleChange(4, 5),
+                AngleChange(4, -35),
+                AngleChange(4, 8),
+                AngleChange(4, -42),
+                AngleChange(4, -15),
+                AngleChange(4, 3),
+                AngleChange(4, -35),
+                AngleChange(4, -40),
+            )),
+        DifficultyData(
+            "Conqueror",
+            40,
+            listOf(
+                AngleChange(4, -5),
+                AngleChange(4, -45),
+                AngleChange(4, 8),
+                AngleChange(4, -40),
+                AngleChange(4, 5),
+                AngleChange(4, -43),
+                AngleChange(4, -20),
+                AngleChange(4, -10),
+                AngleChange(4, -38),
+                AngleChange(4, 10),
+            )),
     )
 
 
