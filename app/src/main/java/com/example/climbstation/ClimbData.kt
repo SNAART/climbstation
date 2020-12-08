@@ -10,9 +10,9 @@ import java.util.*
 
 data class ClimbItem(
     var email: String? = null,
-    var climbTime: String? = null,
+    var climbTime: Long? = null,
     var difficulty: String? = null,
-    var lenght: String? = null,
-    var avgSpeed: String? = null,
-    var date : Date? = null
+    var lenght: Int? = null,
+    var avgSpeed: Int? = null,
+    //var date : Date? = null
 )

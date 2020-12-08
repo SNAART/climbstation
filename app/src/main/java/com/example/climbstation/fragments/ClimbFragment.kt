@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.example.climbstation.ConnectionInfo
+import com.example.climbstation.FirebaseRepo
 import com.example.climbstation.R
 import com.example.climbstation.retrofit.RestApiService
 import kotlinx.android.synthetic.main.fragment_climb.*
@@ -45,6 +46,7 @@ class ClimbFragment : Fragment() {
     private val initialCountDown: Long = 6000000
     private val countDownInterval: Long = 1000
     private var millisecondsPassed: Long = 0
+    private val firebaseRepo: FirebaseRepo = FirebaseRepo()
 
     private var climbingPhase: Int = 0
 
@@ -260,6 +262,12 @@ class ClimbFragment : Fragment() {
                     } else {
                         countDownTimer.cancel()
                         Log.d("asd", "Total climb time: ${millisecondsPassed / 1000} seconds")
+                        var email = firebaseRepo.getUser()
+                        var climbTime = millisecondsPassed / 1000
+                        //var climbLength =
+                        if (email != null) {
+                            firebaseRepo.sendData(email, climbTime, selection.name, 10, 8)
+                        }
                         //TODO:calculate time duration and send to statistics
                         view.start_button.text = "Start"
                     }

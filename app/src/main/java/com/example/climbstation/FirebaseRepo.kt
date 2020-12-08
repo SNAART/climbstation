@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
+import java.util.*
 
 class FirebaseRepo {
 
@@ -13,8 +14,8 @@ class FirebaseRepo {
     private val fireBaseFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     //firebaseAuth
-    fun getUser():FirebaseUser?{
-        return fireBaseAuth.currentUser
+    fun getUser():String?{
+        return fireBaseAuth.currentUser?.email
     }
     //firestore
     fun getData():Task<QuerySnapshot>{
@@ -23,5 +24,12 @@ class FirebaseRepo {
             .whereEqualTo("email", "rasmus.karling@gmail.com") //user email here
             .orderBy("date", Query.Direction.DESCENDING)
             .get()
+    }
+
+    //Remember to add Date back
+    fun sendData(email: String, climbTime: Long, difficulty: String, length: Int, speed: Int){
+        val climbItem = ClimbItem(email, climbTime, difficulty,
+            length, speed)
+        fireBaseFirestore.collection("climb_data").document().set(climbItem)
     }
 }
