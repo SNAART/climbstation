@@ -186,6 +186,9 @@ class ClimbFragment : Fragment() {
             if (key != null) operate(view)
         }
 
+        view.difficulty.text = "Difficulty: ${selection.name}"
+        view.length.text = "Length: ${selection.length}"
+
         return view
     }
 
@@ -260,16 +263,23 @@ class ClimbFragment : Fragment() {
                         climbingPhase = 0
                         setPhaseTimer(view)
                     } else {
+
+                        view.start_button.text = "Start"
                         countDownTimer.cancel()
+                        phaseTimer.cancel()
                         Log.d("asd", "Total climb time: ${millisecondsPassed / 1000} seconds")
+                        //calculate time duration and send to statistics
                         var email = firebaseRepo.getUser()
                         var climbTime = millisecondsPassed / 1000
-                        //var climbLength =
+                        Log.d("asd", "climbTime is: ${climbTime}")
+                        var climbLength = climbTime * speedMMperSecond / 1000
+                        Log.d("asd", "climbLength is: ${climbLength}")
+                        Log.d("asd","speedMMperSecond is: ${speedMMperSecond}")
+                        Log.d("asd","(climbTime * speedMMperSecond / 1000) is: ${(climbTime * speedMMperSecond / 1000)}")
                         if (email != null) {
-                            firebaseRepo.sendData(email, climbTime, selection.name, 10, 8)
+                            firebaseRepo.sendData(email, climbTime, selection.name, climbLength.toInt(), 8)
                         }
-                        //TODO:calculate time duration and send to statistics
-                        view.start_button.text = "Start"
+
                     }
                 }
             } else {

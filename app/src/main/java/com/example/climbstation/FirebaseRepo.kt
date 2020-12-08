@@ -1,11 +1,14 @@
 package com.example.climbstation
 
+import android.annotation.SuppressLint
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
+import java.time.Instant
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class FirebaseRepo {
@@ -26,10 +29,11 @@ class FirebaseRepo {
             .get()
     }
 
-    //Remember to add Date back
     fun sendData(email: String, climbTime: Long, difficulty: String, length: Int, speed: Int){
+        var climbDate = Date()
+
         val climbItem = ClimbItem(email, climbTime, difficulty,
-            length, speed)
+            length, speed, climbDate)
         fireBaseFirestore.collection("climb_data").document().set(climbItem)
     }
 }

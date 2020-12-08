@@ -14,5 +14,5 @@ data class ClimbItem(
     var difficulty: String? = null,
     var lenght: Int? = null,
     var avgSpeed: Int? = null,
-    //var date : Date? = null
+    var date : Date? = null
 )
