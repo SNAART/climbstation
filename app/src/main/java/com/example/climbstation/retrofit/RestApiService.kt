@@ -1,5 +1,6 @@
 package com.example.climbstation.retrofit
 
+import android.util.Log
 
 import com.example.climbstation.ConnectionInfo
 
@@ -14,6 +15,9 @@ class RestApiService {
         retrofit.login(connectionData).enqueue(
             object : Callback<ConnectionInfo> {
                 override fun onFailure(call: Call<ConnectionInfo>, t: Throwable) {
+
+                    Log.d("TAG", "onFailure: Called "+t)
+
                     onResult(null)
                 }
 
@@ -121,6 +125,5 @@ class RestApiService {
             }
         )
     }
-
 
    }

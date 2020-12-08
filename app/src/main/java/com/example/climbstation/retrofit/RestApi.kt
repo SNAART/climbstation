@@ -10,10 +10,12 @@ interface RestApi {
     fun login(@Body connectionData: ConnectionInfo): Call<ConnectionInfo>
 
     @Headers("Content-Type: application/json")
+
     @POST("climbstationinfo")
     fun getInfo(@Body connectionData: ConnectionInfo): Call<ConnectionInfo>
 
     @Headers("Content-Type: application/json")
+
     @POST("Operation")
     fun operate(@Body connectionData: ConnectionInfo): Call<ConnectionInfo>
 
