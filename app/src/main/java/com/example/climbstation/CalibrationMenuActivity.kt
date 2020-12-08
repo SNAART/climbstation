@@ -79,8 +79,8 @@ class CalibrationMenuActivity : AppCompatActivity() {
             angle,
             null,
             null,
-            null
-        )
+            null,
+            null)
 
         apiService.setAngle(userInfo) {
             if (it != null) {

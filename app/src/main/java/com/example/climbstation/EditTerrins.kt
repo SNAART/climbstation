@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.example.climbstation.retrofit.RestApiService
 import kotlinx.android.synthetic.main.activity_edit_terrins.*
 import kotlinx.android.synthetic.main.activity_security.*
-
+/*
 class EditTerrins : AppCompatActivity() {
     private lateinit var speed: String
     private lateinit var angle: String
@@ -68,8 +68,8 @@ class EditTerrins : AppCompatActivity() {
             angle,
             null,
             null,
-            null
-        )
+            null,
+            null)
 
         apiService.setAngle(userInfo) {
             if (it != null) {
@@ -99,6 +99,7 @@ class EditTerrins : AppCompatActivity() {
             null,
             client_key,
             "request",
+            null,
             null,
             null,
             null,
@@ -196,3 +197,5 @@ class EditTerrins : AppCompatActivity() {
         return shred.getString(key, "")!!
     }
 }
+
+ */
