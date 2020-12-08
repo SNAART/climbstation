@@ -6,20 +6,44 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.CompoundButton
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_password.*
 import kotlinx.android.synthetic.main.activity_security.*
 
 class SecurityActivity : AppCompatActivity() {
+    private lateinit var Range1 :String
+    private lateinit var Range2 :String
+    private lateinit var Limit1 :String
+    private lateinit var Limit2 :String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_security)
 
         val shred: SharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
         val bol = shred.getBoolean("element", null == true)
+        val box = shred.getBoolean("box", null == true)
 
-        if (bol){
+        range1.setText(getValues("range1"))
+        range2.setText(getValues("range2"))
+        limit1.setText(getValues("limit1"))
+        limit2.setText(getValues("limit2"))
+
+        if (bol) {
             unClickAbe()
             function_switch.isChecked = bol
+
+        }
+        if (box) {
+            full_range.isChecked = true
+
+            range1.isClickable = false
+            range1.isEnabled = false
+
+            range2.isClickable = false
+            range2.isEnabled = false
+
+            range1.alpha = 0.4f
+            range2.alpha = 0.4f
+        } else  {
+            limited_range.isChecked=true
 
         }
 
@@ -35,9 +59,79 @@ class SecurityActivity : AppCompatActivity() {
             Toast.makeText(this, "Password is removed now", Toast.LENGTH_SHORT).show()
         }
         function_switch.setOnCheckedChangeListener { compoundButton: CompoundButton, b: Boolean ->
-         if (b){
-             unClickAbe()
-         }else clickAble()
+            if (b) {
+                unClickAbe()
+            } else clickAble()
+        }
+        full_range.setOnCheckedChangeListener { compoundButton: CompoundButton, b: Boolean ->
+            if (b){
+                save("box", true)
+                if (limited_range.isChecked){
+                    limited_range.isChecked = false
+                }
+                range1.isClickable = false
+                range1.isEnabled = false
+
+                range2.isClickable = false
+                range2.isEnabled = false
+
+                range1.alpha=0.4f
+                range2.alpha=0.4f
+            }else if(!b){
+                save("box", false)
+                limited_range.isChecked=true
+                range1.isClickable = true
+                range1.isEnabled = true
+
+                range2.isClickable = true
+                range2.isEnabled = true
+                range1.alpha = 1f
+                range2.alpha = 1f
+
+
+            }
+
+        }
+        limited_range.setOnCheckedChangeListener { compoundButton: CompoundButton, b: Boolean ->
+            if (b) {
+                save("box", false)
+                if (full_range.isChecked) {
+                    full_range.isChecked = false
+                }
+
+                range1.isClickable = true
+                range1.isEnabled = true
+
+                range2.isClickable = true
+                range2.isEnabled = true
+                range1.alpha = 1f
+                range2.alpha = 1f
+            }
+            else{
+
+                save("box", true)
+                full_range.isChecked=true
+                range1.isClickable = false
+                range1.isEnabled = false
+                range2.isClickable = false
+                range2.isEnabled = false
+                range1.alpha=0.4f
+                range2.alpha=0.4f
+            }
+
+
+        }
+
+        btn_apply_changes.setOnClickListener{
+            if (checkFields()){
+                saveText("range1",Range1)
+                saveText("range2",Range2)
+                saveText("limit1",Limit1)
+                saveText("limit2",Limit2)
+                Toast.makeText(this, "values saved", Toast.LENGTH_SHORT).show()
+                finish()
+
+            }
         }
     }
 
@@ -68,8 +162,8 @@ class SecurityActivity : AppCompatActivity() {
 
         btn_apply_changes.isClickable = false
         btn_apply_changes.isEnabled = false
-        security_elements.alpha= 0.4F
-        save(true)
+        security_elements.alpha = 0.4F
+        save("element", true)
 
     }
 
@@ -100,13 +194,56 @@ class SecurityActivity : AppCompatActivity() {
 
         btn_apply_changes.isClickable = true
         btn_apply_changes.isEnabled = true
-        security_elements.alpha= 1F
-        save(false)
+        security_elements.alpha = 1F
+        save("element", false)
     }
-    fun save(bol:Boolean){
-        val spassword :SharedPreferences=getSharedPreferences("pref", MODE_PRIVATE)
-        val editor:SharedPreferences.Editor=spassword.edit()
-        editor.putBoolean("element",bol)
+
+    fun save(key: String, bol: Boolean) {
+        val spassword: SharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = spassword.edit()
+        editor.putBoolean(key, bol)
         editor.apply()
+    }
+    fun saveText(key: String, value: String) {
+        val spassword: SharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = spassword.edit()
+        editor.putString(key, value)
+        editor.apply()
+    }
+
+    fun checkFields():Boolean{
+        Range1= range1.text.toString().trim()
+        Range2=range2.text.toString().trim()
+        Limit1=limit1.text.toString().trim()
+        Limit2=limit2.text.toString().trim()
+
+        when {
+            Range1.isEmpty() -> {
+                range1.error = "Please enter range"
+                range1.requestFocus()
+                return false
+            }
+            Range2.isEmpty() -> {
+                range2.error = "Please enter range"
+                range2.requestFocus()
+                return false
+            }
+            Limit1.isEmpty() -> {
+                limit1.error = "Please enter limit"
+                limit1.requestFocus()
+                return false
+            }
+            Limit2.isEmpty() -> {
+                limit2.error = "Please enter limit"
+                limit2.requestFocus()
+                return false
+            }
+            else -> return true
+        }
+    }
+
+    fun getValues(key:String):String{
+        val shred: SharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
+        return shred.getString(key, "")!!
     }
 }

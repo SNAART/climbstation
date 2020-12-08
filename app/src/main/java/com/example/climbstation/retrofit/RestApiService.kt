@@ -39,6 +39,7 @@ class RestApiService {
                     call: Call<ConnectionInfo>,
                     response: Response<ConnectionInfo>
                 ) {
+                    Log.d("TAG", "onResponse: $response")
                     val addedUser = response.body()
                     onResult(addedUser)
                 }
@@ -69,6 +70,7 @@ class RestApiService {
             }
         )
     }
+
     fun setAngle(connectionData: ConnectionInfo, onResult: (ConnectionInfo?) -> Unit) {
         retrofit.setAngle(connectionData).enqueue(
             object : Callback<ConnectionInfo> {
@@ -114,6 +116,7 @@ class RestApiService {
                     call: Call<ConnectionInfo>,
                     response: Response<ConnectionInfo>
                 ) {
+                    Log.d("TAG", "onResponse: $response")
                     val addedUser = response.body()
                     onResult(addedUser)
                 }

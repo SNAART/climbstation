@@ -26,14 +26,14 @@
             android:text="Calibiration Distance"/>
 
         <EditText
+            android:id="@+id/get_distance"
             android:padding="5dp"
             android:background="@drawable/box_edit_text"
             android:layout_toLeftOf="@+id/scale"
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
-            android:textSize="18sp"
             android:layout_height="wrap_content"
-            android:text="3.65"/>
+           android:hint="35"/>
         <TextView
             android:layout_marginLeft="10dp"
             android:id="@+id/scale"
@@ -71,16 +71,16 @@
                 android:src="@drawable/minus"
 
                 />
+
             <TextView
-                android:id="@+id/txNumber"
+                android:id="@+id/txNumbers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:inputType="number"
-                android:gravity="center"
                 android:layout_marginHorizontal="15dp"
+                android:gravity="center"
+                android:inputType="number"
                 android:text="0"
-                />
+                android:textSize="18dp" />
             <ImageView
                 android:id="@+id/btn_plus"
                 android:layout_width="30dp"
@@ -112,18 +112,18 @@
             android:text="Calories"/>
 
         <EditText
-            android:layout_toLeftOf="@+id/cal_scale"
+            android:layout_toLeftOf="@+id/cali"
+            android:id="@+id/cal_scale"
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
-            android:textSize="18sp"
             android:padding="5dp"
             android:background="@drawable/box_edit_text"
             android:layout_height="wrap_content"
-            android:text="50"/>
+            android:hint="30"/>
         <TextView
-            android:layout_marginLeft="10dp"
-            android:id="@+id/cal_scale"
             android:layout_alignParentRight="true"
+           android:id="@+id/cali"
+            android:layout_marginLeft="10dp"
             android:textSize="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -134,6 +134,7 @@
 
     </RelativeLayout>
     <Button
+        android:id="@+id/saveChanges"
         android:layout_marginTop="40dp"
         android:layout_gravity="center"
         android:padding="10dp"

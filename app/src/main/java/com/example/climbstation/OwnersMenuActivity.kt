@@ -24,8 +24,27 @@ class OwnersMenuActivity : AppCompatActivity() {
         setMeasurement()
         setModes()
         setReport()
+        val restore = getValues("angleRestore")
+        if (restore == "1") {
+            restore_angle.isChecked = true
+        }
+
+        restore_angle.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                val oldAngle = getValues("oldAngle")
+                save("angle", oldAngle)
+                save("angleRestore", "1")
+
+                Toast.makeText(this, "angle value changed now", Toast.LENGTH_SHORT).show()
+            } else {
+                save("angleRestore", "0")
+
+
+            }
+        }
 
     }
+
 
     fun save(key: String, value: String) {
         val spassword: SharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
@@ -60,15 +79,19 @@ class OwnersMenuActivity : AppCompatActivity() {
             }
         }
     }
-        fun setMeasurement() {
-            val shred: SharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
-            val bol = shred.getString("measurement", "")
-            if (bol == "Meter") {
-                meter.isChecked = true
-            } else {
-                foot.isChecked = true
-            }
+
+    fun setMeasurement() {
+        val shred: SharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
+        val bol = shred.getString("measurement", "")
+        scale.text = bol
+        if (bol == "Meter") {
+            meter.isChecked = true
+
+        } else {
+            foot.isChecked = true
         }
+    }
+
     fun setModes() {
         val shred: SharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
         when (shred.getString("modes", "")) {
@@ -79,13 +102,15 @@ class OwnersMenuActivity : AppCompatActivity() {
                 repeat.isChecked = true
             }
             "Slow Down" -> {
-                slow_down.isChecked=true
+                slow_down.isChecked = true
             }
             else -> {
-                next_level.isChecked=true
+                next_level.isChecked = true
             }
         }
-    }fun setReport() {
+    }
+
+    fun setReport() {
         val shred: SharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
         val bol = shred.getString("report", "")
         if (bol == "Monthly") {
@@ -93,6 +118,11 @@ class OwnersMenuActivity : AppCompatActivity() {
         } else {
             weekly.isChecked = true
         }
+    }
+
+    fun getValues(key: String): String {
+        val shred: SharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
+        return shred.getString(key, "")!!
     }
 
 }
