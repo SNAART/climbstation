@@ -13,7 +13,7 @@
         android:layout_height="101dp"
         android:layout_marginBottom="20dp"
         android:contentDescription="TODO"
-        android:src="@drawable/cslogo"
+        android:src="@mipmap/cslogo"
         />
     <LinearLayout
         android:layout_centerInParent="true"

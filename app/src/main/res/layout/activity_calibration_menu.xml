@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="101dp"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/cslogo" />
+        android:src="@mipmap/cslogo" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
