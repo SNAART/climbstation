@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
@@ -26,6 +27,14 @@ class FirebaseRepo {
             .collection("climb_data")
             .whereEqualTo("email", getUser()) //user email here
             .orderBy("date", Query.Direction.DESCENDING)
+            .get()
+    }
+    fun getLatestData(): Task<QuerySnapshot> {
+        return fireBaseFirestore
+            .collection("climb_data")
+            .whereEqualTo("email", getUser()) //user email here
+            .orderBy("date", Query.Direction.DESCENDING)
+            .limit(1)
             .get()
     }
 
