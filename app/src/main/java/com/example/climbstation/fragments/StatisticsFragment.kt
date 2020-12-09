@@ -88,7 +88,7 @@ class StatisticsFragment : Fragment() {
                 for (document in documents) {
                     Log.d("fb", "${document.id} => ${document.data}")
 
-                    tv_time.text = "Climb time: "+document.data["climbTime"]
+                    tv_time.text = "Climb time: "+document.data["climbTime"]+"s"
 
                     tv_difficulty.text = "Difficulty was: ${document.data["difficulty"]}"
                     tv_lenght.text = "length climbed: "+document.data["lenght"].toString()+"m"
