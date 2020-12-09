@@ -1,5 +1,6 @@
 package com.example.climbstation.fragments
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -13,15 +14,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ProgressBar
 import com.example.climbstation.ConnectionInfo
 import com.example.climbstation.FirebaseRepo
 import com.example.climbstation.R
 import com.example.climbstation.retrofit.RestApiService
+import kotlinx.android.synthetic.main.activity_owners_menu.*
 import kotlinx.android.synthetic.main.fragment_climb.*
 import kotlinx.android.synthetic.main.fragment_climb.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Integer.min
 import kotlin.concurrent.timer
 
 // TODO: Rename parameter arguments, choose names that match
@@ -47,7 +51,7 @@ class ClimbFragment : Fragment() {
     private val countDownInterval: Long = 1000
     private var millisecondsPassed: Long = 0
     private val firebaseRepo: FirebaseRepo = FirebaseRepo()
-
+    private var animation: ObjectAnimator? = null
     private var climbingPhase: Int = 0
 
     private var speedMMperSecond: Int = 200
@@ -90,6 +94,15 @@ class ClimbFragment : Fragment() {
         // set angle
         val angle = selection.climbingPhases[climbingPhase].angle.toString()
         setAngle(angle)
+
+        // set the progress for this phase
+        val barId = "bar${climbingPhase + 1}"
+        val id: Int = resources.getIdentifier(barId, "id", "com.example.climbstation")
+        val progress = view.findViewById<ProgressBar>(id)
+        progress.max = 100
+        animation = ObjectAnimator.ofInt(progress, "progress", 100)
+            .setDuration(phaseTime*1000)
+        animation?.start()
 
         // start timer for end of phase
         phaseTimer = object : CountDownTimer(phaseTime * 1000, countDownInterval) {
@@ -189,7 +202,19 @@ class ClimbFragment : Fragment() {
         view.difficulty.text = "Difficulty: ${selection.name}"
         view.length.text = "Length: ${selection.length}"
 
+        // trackProgress(view)
+
         return view
+    }
+
+    fun clearProgress(view: View) {
+        for (i in 1..10) {
+            val barId = "bar${i}"
+            val id: Int = resources.getIdentifier(barId, "id", "com.example.climbstation")
+            val progress = view.findViewById<ProgressBar>(id)
+            progress.progress = 0
+            progress.max = 100
+        }
     }
 
     fun login() {
@@ -257,6 +282,7 @@ class ClimbFragment : Fragment() {
                 if(it.response == "OK" || true){
                     started = !started
                     if (started) {
+                        clearProgress(view)
                         setSpeed(speedMMperSecond.toString())
                         countDownTimer.start()
                         view.start_button.text = "Stop"
@@ -271,15 +297,31 @@ class ClimbFragment : Fragment() {
                         //calculate time duration and send to statistics
                         var email = firebaseRepo.getUser()
                         var climbTime = millisecondsPassed / 1000
-                        Log.d("asd", "climbTime is: ${climbTime}")
-                        var climbLength = climbTime * speedMMperSecond / 1000
-                        Log.d("asd", "climbLength is: ${climbLength}")
-                        Log.d("asd","speedMMperSecond is: ${speedMMperSecond}")
-                        Log.d("asd","(climbTime * speedMMperSecond / 1000) is: ${(climbTime * speedMMperSecond / 1000)}")
+                        var climbLength: Double = (climbTime.toDouble() * speedMMperSecond.toDouble()) / 1000
+                        Log.d("asd", "climb Length is: ${climbLength} meters")
                         if (email != null) {
                             firebaseRepo.sendData(email, climbTime, selection.name, climbLength.toInt(), 8)
                         }
 
+                        // set progress to be where run was stopped
+                        val completedPhasesLength = selection
+                            .climbingPhases
+                            .filterIndexed { index, it -> index < climbingPhase }
+                            .sumBy { it.distance }
+                        val currentPhaseLength = selection.climbingPhases[climbingPhase].distance
+                        val currentPhaseProgress = climbLength - completedPhasesLength
+                        val currentPhasePercentage = currentPhaseProgress / currentPhaseLength * 100
+                        animation?.end()
+                        val barId = "bar${climbingPhase + 1}"
+                        val id: Int = resources.getIdentifier(barId, "id", "com.example.climbstation")
+                        val progress = view.findViewById<ProgressBar>(id)
+                        progress.progress = currentPhasePercentage.toInt()
+                        Log.d("asd", "Setting final progress ${currentPhasePercentage}")
+
+                        //do the action related to the selected mode
+                        modeAction(view)
+
+                        millisecondsPassed = 0
                     }
                 }
             } else {
@@ -301,7 +343,23 @@ class ClimbFragment : Fragment() {
         view.mode.text = "Mode: ${selectedMode}"
     }
 
-    data class AngleChange(val distance: Int, val angle: Int);
+    private fun modeAction(view: View){
+        if(selectedMode == "To next level"){
+            var currentID = listData.indexOf(selection)
+            val nextID: Int = min(currentID + 1, listData.size - 1)
+            selection = listData.get(nextID)
+            renderList(view)
+        } else if (selectedMode == "Random") {
+            val maxValue = listData.size - 1
+            val nextID: Int = (0..maxValue).random()
+            selection = listData.get(nextID)
+            renderList(view)
+        } else if (selectedMode == "Slow down") {
+            speedMMperSecond -= 20
+        }
+    }
+
+    data class AngleChange(val distance: Int, val angle: Int)
     data class DifficultyData(
         val name: String,
         val length: Int,
@@ -312,11 +370,16 @@ class ClimbFragment : Fragment() {
             "Beginner",
             20,
             listOf(
-                AngleChange(6, 15),
+                AngleChange(2, 15),
+                AngleChange(2, 15),
+                AngleChange(2, 15),
                 AngleChange(2, 12),
-                AngleChange(6, 10),
+                AngleChange(2, 10),
+                AngleChange(2, 10),
+                AngleChange(2, 10),
                 AngleChange(2, 5),
-                AngleChange(4, 15),
+                AngleChange(2, 15),
+                AngleChange(2, 15),
             )
         ),
         DifficultyData(
@@ -464,9 +527,9 @@ class ClimbFragment : Fragment() {
     private fun makeSpan(name: String): SpannableString {
         val span = SpannableString(name)
 
-        if(selection.name != name){
+        if(selection.name == name){
             span.setSpan(
-                ForegroundColorSpan(Color.GRAY),
+                ForegroundColorSpan(Color.RED),
                 0,
                 span.length,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -482,11 +545,11 @@ class ClimbFragment : Fragment() {
             android.R.layout.simple_list_item_1,
             listItems
         )
+        view.difficulty.text = "Difficulty: ${selection.name}"
+        view.length.text = "Length: ${selection.length}"
         view.mylist.adapter = adapter
         view.mylist.setOnItemClickListener { parent, view2, position, id ->
             selection = listData[position]
-            view.difficulty.text = "Difficulty: ${selection.name}"
-            view.length.text = "Length: ${selection.length}"
             renderList(view)
         }
     }
