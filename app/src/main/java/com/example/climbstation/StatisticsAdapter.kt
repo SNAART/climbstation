@@ -10,10 +10,8 @@ class StatisticsAdapter(var postListItems: List<ClimbItem>):RecyclerView.Adapter
 
     class ItemViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
         fun bind(climbItem: ClimbItem){
-            itemView.tv_item_date.text = climbItem.date.toString()
+            itemView.tv_item_email.text = climbItem.email
             itemView.tv_item_difficulty.text = climbItem.difficulty
-            itemView.tv_item_time.text = "Time: "+climbItem.climbTime.toString()
-            itemView.tv_item_lenght.text = "Length: "+climbItem.lenght.toString()
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.example.climbstation.retrofit.RestApiService
 import kotlinx.android.synthetic.main.activity_edit_terrins.*
 import kotlinx.android.synthetic.main.activity_security.*
-/*
+
 class EditTerrins : AppCompatActivity() {
     private lateinit var speed: String
     private lateinit var angle: String
@@ -29,19 +29,15 @@ class EditTerrins : AppCompatActivity() {
                 save("speed", speed)
                 sendSpeed()
                 getInfo()
+                val oldAngle = getValues("angle")
+                val oldLength = getValues("length")
+                save("oldAngle", oldAngle)
+                save("oldLength", oldLength)
+                save("angle", angle)
+                sendAngle()
 
                 save("length", length)
-                var intAngle = Integer.parseInt(angle)
-                if (intAngle <= 45 && intAngle >= -45) {
 
-                    val oldAngle = getValues("angle")
-                    save("oldAngle", oldAngle)
-                    save("angle", angle)
-                    sendAngle()
-                } else {
-                    get_angle.error = "enter angle between (-45)-(+45)"
-                    get_angle.requestFocus()
-                }
                 Toast.makeText(this, "values are saved", Toast.LENGTH_SHORT).show()
                 finish()
             }
@@ -69,7 +65,7 @@ class EditTerrins : AppCompatActivity() {
             null,
             null,
             null,
-            null)
+            Integer.parseInt(angle))
 
         apiService.setAngle(userInfo) {
             if (it != null) {
@@ -104,8 +100,7 @@ class EditTerrins : AppCompatActivity() {
             null,
             null,
             null,
-            null
-        )
+        null)
 
         apiService.getInfo(userInfo) {
             if (it != null) {
@@ -139,7 +134,8 @@ class EditTerrins : AppCompatActivity() {
             null,
             null,
             null,
-            speed
+            Integer.parseInt(speed),
+            null
         )
 
         apiService.setSpeed(userInfo) {
@@ -167,11 +163,18 @@ class EditTerrins : AppCompatActivity() {
         speed = get_speed.text.toString().trim()
         angle = get_angle.text.toString().trim()
         length = get_length.text.toString().trim()
-
+        var intAngle = Integer.parseInt(angle)
+        var intSpeed = Integer.parseInt(speed)
+        var intLength = Integer.parseInt(length)
 
         when {
             speed.isEmpty() -> {
                 get_speed.error = "Please enter speed"
+                get_speed.requestFocus()
+                return false
+            }
+            intSpeed !in 0..20 ->{
+                get_speed.error = "enter speed 0-20"
                 get_speed.requestFocus()
                 return false
             }
@@ -182,9 +185,24 @@ class EditTerrins : AppCompatActivity() {
                 return false
             }
 
+            intAngle >45 -> {
+                get_angle.error = "enter angle  equal or less than +45"
+                get_angle.requestFocus()
+               return false
+            }
+            intAngle <-45 -> {
+                get_angle.error = "enter angle equal or greater then  than -45"
+                get_angle.requestFocus()
+                return false
+            }
 
             length.isEmpty() -> {
                 get_length.error = "Please enter limit"
+                get_length.requestFocus()
+                return false
+            }
+            intLength !in 0..20 ->{
+                get_length.error = "enter limit 0-20"
                 get_length.requestFocus()
                 return false
             }
@@ -197,5 +215,3 @@ class EditTerrins : AppCompatActivity() {
         return shred.getString(key, "")!!
     }
 }
-
- */

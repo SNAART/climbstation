@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.CompoundButton
 import android.widget.Toast
+import com.google.protobuf.Internal
 import kotlinx.android.synthetic.main.activity_security.*
 
 class SecurityActivity : AppCompatActivity() {
@@ -216,6 +217,8 @@ class SecurityActivity : AppCompatActivity() {
         Range2=range2.text.toString().trim()
         Limit1=limit1.text.toString().trim()
         Limit2=limit2.text.toString().trim()
+        val intRange1= Integer.parseInt(Range1)
+        val intRange2= Integer.parseInt(Range2)
 
         when {
             Range1.isEmpty() -> {
@@ -233,11 +236,22 @@ class SecurityActivity : AppCompatActivity() {
                 limit1.requestFocus()
                 return false
             }
+            intRange1 !in -45..0 ->{
+                range1.error = "enter range -45 to 0 "
+                range1.requestFocus()
+                return false
+            }
             Limit2.isEmpty() -> {
                 limit2.error = "Please enter limit"
                 limit2.requestFocus()
                 return false
             }
+            intRange2 !in 0..45 ->{
+                range2.error = "enter range 0..45"
+                range2.requestFocus()
+                return false
+            }
+
             else -> return true
         }
     }

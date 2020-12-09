@@ -10,7 +10,7 @@ import java.lang.Error
 
 class TestThingy : AppCompatActivity() {
     var key: String? = null
-    var speed :String? = null
+    var speed :Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
