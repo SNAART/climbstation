@@ -28,6 +28,7 @@
         <EditText
             android:id="@+id/get_distance"
             android:padding="5dp"
+            android:inputType="numberDecimal"
             android:background="@drawable/box_edit_text"
             android:layout_toLeftOf="@+id/scale"
             android:layout_width="wrap_content"
@@ -111,7 +112,7 @@
             android:layout_centerVertical="true"
             android:text="Calories"/>
 
-        <EditText
+        <TextView
             android:layout_toLeftOf="@+id/cali"
             android:id="@+id/cal_scale"
             android:layout_width="wrap_content"
@@ -119,7 +120,7 @@
             android:padding="5dp"
             android:background="@drawable/box_edit_text"
             android:layout_height="wrap_content"
-            android:hint="30"/>
+           />
         <TextView
             android:layout_alignParentRight="true"
            android:id="@+id/cali"

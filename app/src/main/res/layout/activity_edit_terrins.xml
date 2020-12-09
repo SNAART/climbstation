@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="101dp"
         android:layout_marginBottom="20dp"
-        android:src="@mipmap/cslogo" />
+        android:src="@drawable/cslogo" />
    <RelativeLayout
 
        android:layout_width="match_parent"
@@ -24,16 +24,18 @@
            android:layout_height="wrap_content"
            android:text="Set Speed"
            />
+
        <EditText
-           android:inputType="number"
            android:id="@+id/get_speed"
-           android:background="@drawable/box_edit_text"
-           android:padding="5dp"
-           android:gravity="center"
-           android:layout_centerInParent="true"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:hint="10"/>
+           android:layout_centerHorizontal="true"
+           android:background="@drawable/box_edit_text"
+           android:gravity="center"
+           android:hint="10"
+           android:inputType="number"
+           android:maxLength="2"
+           android:padding="5dp" />
    </RelativeLayout>
     <RelativeLayout
         android:layout_marginVertical="20dp"
@@ -46,16 +48,18 @@
             android:layout_height="wrap_content"
             android:text="Set Angle"
             />
+
         <EditText
-            android:inputType="numberSigned"
             android:id="@+id/get_angle"
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
-            android:background="@drawable/box_edit_text"
-            android:padding="5dp"
-            android:gravity="center"
             android:layout_height="wrap_content"
-            android:hint="10"/>
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/box_edit_text"
+            android:gravity="center"
+            android:hint="10"
+            android:inputType="numberSigned"
+            android:maxLength="3"
+            android:padding="5dp" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -72,6 +76,7 @@
             android:id="@+id/get_length"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
+            android:maxLength="2"
             android:background="@drawable/box_edit_text"
             android:padding="5dp"
             android:gravity="center"
