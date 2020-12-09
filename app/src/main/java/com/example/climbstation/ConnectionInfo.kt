@@ -27,5 +27,5 @@ data class ConnectionInfo (
     @SerializedName("Angle") val angle: String?
 
 
-
         )
+
