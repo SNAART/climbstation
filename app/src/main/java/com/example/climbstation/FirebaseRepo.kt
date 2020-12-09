@@ -24,7 +24,7 @@ class FirebaseRepo {
     fun getData():Task<QuerySnapshot>{
         return fireBaseFirestore
             .collection("climb_data")
-            .whereEqualTo("email", "rasmus.karling@gmail.com") //user email here
+            .whereEqualTo("email", getUser()) //user email here
             .orderBy("date", Query.Direction.DESCENDING)
             .get()
     }
