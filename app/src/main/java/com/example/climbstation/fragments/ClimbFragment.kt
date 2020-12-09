@@ -92,7 +92,7 @@ class ClimbFragment : Fragment() {
         Log.d("asd", "Setting phase timer ${climbingPhase} time: ${phaseTime} seconds")
 
         // set angle
-        val angle = selection.climbingPhases[climbingPhase].angle
+        val angle = selection.climbingPhases[climbingPhase].angle.toString()
         setAngle(angle)
 
         // set the progress for this phase
@@ -130,7 +130,7 @@ class ClimbFragment : Fragment() {
         phaseTimer.start()
     }
 
-    private fun setAngle(angle: Int) {
+    private fun setAngle(angle: String) {
         Log.d("asd", "Setting wall angle ${angle}")
         val angleInfo = ConnectionInfo(
             "2c",
@@ -157,7 +157,7 @@ class ClimbFragment : Fragment() {
         }
     }
 
-    private fun setSpeed(speed: Int) {
+    private fun setSpeed(speed: String) {
         Log.d("asd", "Setting wall speed ${speed}")
         val speedInfo = ConnectionInfo(
             "2c",
@@ -283,7 +283,7 @@ class ClimbFragment : Fragment() {
                     started = !started
                     if (started) {
                         clearProgress(view)
-                        setSpeed(speedMMperSecond)
+                        setSpeed(speedMMperSecond.toString())
                         countDownTimer.start()
                         view.start_button.text = "Stop"
                         climbingPhase = 0

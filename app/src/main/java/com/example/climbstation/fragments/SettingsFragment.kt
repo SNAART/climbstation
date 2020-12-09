@@ -58,6 +58,10 @@ class SettingsFragment : Fragment() {
             val intent:Intent= Intent(context,SecurityActivity::class.java)
             startActivity(intent)
         }
+        view.terrains.setOnClickListener{
+            //val intent:Intent= Intent(context,EditTerrins::class.java)
+           // startActivity(intent)
+        }
 
 //        view.tv_name.text = username
 //
