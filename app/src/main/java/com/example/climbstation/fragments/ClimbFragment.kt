@@ -19,11 +19,13 @@ import com.example.climbstation.ConnectionInfo
 import com.example.climbstation.FirebaseRepo
 import com.example.climbstation.R
 import com.example.climbstation.retrofit.RestApiService
+import kotlinx.android.synthetic.main.activity_owners_menu.*
 import kotlinx.android.synthetic.main.fragment_climb.*
 import kotlinx.android.synthetic.main.fragment_climb.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Integer.min
 import kotlin.concurrent.timer
 
 // TODO: Rename parameter arguments, choose names that match
@@ -147,7 +149,7 @@ class ClimbFragment : Fragment() {
             angle
         )
         restApiService.setAngle(angleInfo) {
-            if (it?.response != "NOTOK") {
+            if (it?.response == "OK") {
                 Log.d("asd", "Angle set successfully")
             } else {
                 Log.d("asd", "Angle was not set successfully")
@@ -174,7 +176,7 @@ class ClimbFragment : Fragment() {
             null
         )
         restApiService.setSpeed(speedInfo) {
-            if (it?.response != null) {
+            if (it?.response == "OK") {
                 Log.d("asd", "Speed set successfully")
             } else {
                 Log.d("asd", "Speed was not set successfully")
@@ -295,7 +297,7 @@ class ClimbFragment : Fragment() {
                         //calculate time duration and send to statistics
                         var email = firebaseRepo.getUser()
                         var climbTime = millisecondsPassed / 1000
-                        var climbLength = climbTime * speedMMperSecond / 1000
+                        var climbLength: Double = (climbTime.toDouble() * speedMMperSecond.toDouble()) / 1000
                         Log.d("asd", "climb Length is: ${climbLength} meters")
                         if (email != null) {
                             firebaseRepo.sendData(email, climbTime, selection.name, climbLength.toInt(), 8)
@@ -309,12 +311,17 @@ class ClimbFragment : Fragment() {
                         val currentPhaseLength = selection.climbingPhases[climbingPhase].distance
                         val currentPhaseProgress = climbLength - completedPhasesLength
                         val currentPhasePercentage = currentPhaseProgress / currentPhaseLength * 100
-                        animation?.pause()
+                        animation?.end()
                         val barId = "bar${climbingPhase + 1}"
                         val id: Int = resources.getIdentifier(barId, "id", "com.example.climbstation")
                         val progress = view.findViewById<ProgressBar>(id)
                         progress.progress = currentPhasePercentage.toInt()
+                        Log.d("asd", "Setting final progress ${currentPhasePercentage}")
 
+                        //do the action related to the selected mode
+                        modeAction(view)
+
+                        millisecondsPassed = 0
                     }
                 }
             } else {
@@ -334,6 +341,22 @@ class ClimbFragment : Fragment() {
         val nextIndex = (index + 1) % 4
         selectedMode = modeList[nextIndex]
         view.mode.text = "Mode: ${selectedMode}"
+    }
+
+    private fun modeAction(view: View){
+        if(selectedMode == "To next level"){
+            var currentID = listData.indexOf(selection)
+            val nextID: Int = min(currentID + 1, listData.size - 1)
+            selection = listData.get(nextID)
+            renderList(view)
+        } else if (selectedMode == "Random") {
+            val maxValue = listData.size - 1
+            val nextID: Int = (0..maxValue).random()
+            selection = listData.get(nextID)
+            renderList(view)
+        } else if (selectedMode == "Slow down") {
+            speedMMperSecond -= 20
+        }
     }
 
     data class AngleChange(val distance: Int, val angle: Int)
@@ -522,11 +545,11 @@ class ClimbFragment : Fragment() {
             android.R.layout.simple_list_item_1,
             listItems
         )
+        view.difficulty.text = "Difficulty: ${selection.name}"
+        view.length.text = "Length: ${selection.length}"
         view.mylist.adapter = adapter
         view.mylist.setOnItemClickListener { parent, view2, position, id ->
             selection = listData[position]
-            view.difficulty.text = "Difficulty: ${selection.name}"
-            view.length.text = "Length: ${selection.length}"
             renderList(view)
         }
     }
