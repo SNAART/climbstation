@@ -56,25 +56,24 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/mylist"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.281" />
 
         <ListView
             android:id="@+id/mylist"
             android:layout_width="150dp"
             android:layout_height="235dp"
             android:layout_marginEnd="28dp"
-            android:layout_marginBottom="72dp"
-            app:layout_constraintBottom_toTopOf="@+id/button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
-            app:layout_constraintVertical_bias="0.891" />
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/difficulty"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/mode"
             android:layout_width="156dp"
             android:layout_height="30dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginBottom="56dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginBottom="36dp"
             android:text="Mode:"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -90,6 +89,116 @@
             android:text="Start"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/bar1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="144dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="32dp"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/difficulty"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/bar2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="144dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="12dp"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar1"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/bar4"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="144dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="12dp"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar3"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/bar6"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="144dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="12dp"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/bar9"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="144dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="12dp"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar8"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/bar10"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="144dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="12dp"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar9"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/bar8"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="144dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="12dp"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar7"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/bar7"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="144dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="12dp"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar6"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/bar5"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="144dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="12dp"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar4"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/bar3"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="144dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="12dp"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar2"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
