@@ -464,9 +464,9 @@ class ClimbFragment : Fragment() {
     private fun makeSpan(name: String): SpannableString {
         val span = SpannableString(name)
 
-        if(selection.name != name){
+        if(selection.name == name){
             span.setSpan(
-                ForegroundColorSpan(Color.GRAY),
+                ForegroundColorSpan(Color.RED),
                 0,
                 span.length,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
