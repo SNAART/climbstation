@@ -1,22 +1,18 @@
 package com.example.climbstation.fragments
 
-import android.content.ContentValues.TAG
-import android.content.Intent
-import android.content.res.Configuration
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.climbstation.MainActivity
-import com.example.climbstation.R
-import com.example.climbstation.TestThingy
-import com.google.firebase.auth.FirebaseAuth
+import com.example.climbstation.*
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_statistics.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,8 +30,6 @@ class StatisticsFragment : Fragment() {
     private var param2: String? = null
 
     var db = FirebaseFirestore.getInstance()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,8 +65,18 @@ class StatisticsFragment : Fragment() {
 
  */
 
+    private fun getDateTime(s: String): String? {
+        try {
+            val sdf = SimpleDateFormat("dd/MM/yyyy")
+            val netDate = Date(s.toLong() * 1000)
+            return sdf.format(netDate)
+        } catch (e: Exception) {
+            return e.toString()
+        }
+    }
 
 
+    @SuppressLint("SetTextI18n")
     private fun getLatestData() {
         Log.d("fb","getdata started")
         db.collection("climb_data")
@@ -83,11 +87,13 @@ class StatisticsFragment : Fragment() {
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d("fb", "${document.id} => ${document.data}")
-                    tv_time.text = document.data["time"].toString()
+
+                    tv_time.text = "Climb time: "+document.data["climbTime"]
+
                     tv_difficulty.text = "Difficulty was: ${document.data["difficulty"]}"
-                    tv_lenght.text = document.data["lenght"].toString()
-                    tv_speed.text = document.data["avgspeed"].toString()
-                    tv_date.text = document.data["date"].toString()
+                    tv_lenght.text = "length climbed: "+document.data["lenght"].toString()+"m"
+                    tv_speed.text = "Average speed: "+document.data["avgSpeed"].toString()+"m/min"
+                    tv_date.text = "This climbing was done:"+document.data["date"]
                 }
             }
             .addOnFailureListener { exception ->
@@ -97,6 +103,8 @@ class StatisticsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        getLatestData()
+
         activity.let {
             btn_stats.setOnClickListener{
                 (activity as MainActivity?)!!.startList()

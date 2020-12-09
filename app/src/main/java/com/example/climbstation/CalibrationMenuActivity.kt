@@ -1,5 +1,6 @@
 package com.example.climbstation
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -20,15 +21,13 @@ class CalibrationMenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_calibration_menu)
         txNumbers.text = getValues("angle")
         scale.text = getValues("measurement")
-        val time= getTime("time")
-        val elapsedTime: Long = System.currentTimeMillis() - time
-        val exactTime=elapsedTime*(7* 70 *3.5)/ 200
+
         get_distance.setText(getValues("distance"))
-       cal_scale.setText(exactTime.toString())
+        cal_scale.setText(getValues("cal"))
 
 
         btn_plus.setOnClickListener {
-            if (num <= 44) {
+            if (num <= 45) {
                 num++
                 setText()
             } else {
@@ -38,11 +37,11 @@ class CalibrationMenuActivity : AppCompatActivity() {
 
         }
         btn_minus.setOnClickListener {
-            if (num >= -44) {
+            if (num >= -45) {
                 num--
                 setText()
             } else {
-                Toast.makeText(this, "angle cant be less than -45", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "angle cant be greater than 45", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -53,8 +52,8 @@ class CalibrationMenuActivity : AppCompatActivity() {
                 save("oldAngle", angle)
                 save("angle", num.toString())
                 save("distance", distance)
+                save("cal", cal)
                 sendAngle()
-                getInfo()
                 Toast.makeText(this, "values saved", Toast.LENGTH_SHORT).show()
                 finish()
             }
@@ -81,8 +80,7 @@ class CalibrationMenuActivity : AppCompatActivity() {
             null,
             null,
             null,
-            Integer.parseInt(angle)
-        )
+            null)
 
         apiService.setAngle(userInfo) {
             if (it != null) {
@@ -106,27 +104,18 @@ class CalibrationMenuActivity : AppCompatActivity() {
         val shred: SharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
         return shred.getString(key, "")!!
     }
-    fun getTime(key: String): Long {
-        val shred: SharedPreferences = getSharedPreferences("pref", MODE_PRIVATE)
-        return shred.getLong(key, 0)!!
-    }
+
     fun checkFields(): Boolean {
         distance = get_distance.text.toString().trim()
         num = Integer.parseInt(txNumbers.text.toString().trim())
         cal = cal_scale.text.toString().trim()
-        var intDistance = Integer.parseInt(distance)
+
 
         when {
             distance.isEmpty() -> {
                 get_distance.error = "Please enter distance"
                 get_distance.requestFocus()
                 return false
-            }
-            intDistance !in 0..20 ->{
-                get_distance.error = "Please enter distance 0-20"
-                get_distance.requestFocus()
-                return false
-
             }
 
             num == null -> {
@@ -135,6 +124,12 @@ class CalibrationMenuActivity : AppCompatActivity() {
                 return false
             }
 
+
+            cal.isEmpty() -> {
+                cal_scale.error = "Please enter calories"
+                cal_scale.requestFocus()
+                return false
+            }
             else -> return true
         }
     }
@@ -145,40 +140,5 @@ class CalibrationMenuActivity : AppCompatActivity() {
         val editor: SharedPreferences.Editor = spassword.edit()
         editor.putString(key, value)
         editor.apply()
-    }
-    private fun getInfo() {
-        val apiService = RestApiService()
-        client_key = getValues("client_key")
-        Log.d("TAG", "sendAngle: client key " + client_key)
-
-        val userInfo = ConnectionInfo(
-            "2b",
-            1,
-            null,
-            "20110001",
-            null,
-            null,
-            client_key,
-            "request",
-            null,
-            null,
-            distance,
-            null,
-            null,
-            null
-        )
-
-        apiService.getInfo(userInfo) {
-            if (it != null) {
-                // it = newly added user parsed as response
-                // it?.id = newly added user ID
-                //  Log.d("http", it.toString())
-                // Log.d("http",it.clientKey)
-                Log.d("TAG", "sendLength: " + it.response)
-
-            } else {
-                Log.d("error", "Error registering new user")
-            }
-        }
     }
 }

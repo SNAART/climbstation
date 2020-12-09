@@ -14,4 +14,5 @@ scanning the QR-code attached to the wall</string>
     <string name="stat_btn">View earlier results and improvement</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="list_length">Length: %d </string>
 </resources>

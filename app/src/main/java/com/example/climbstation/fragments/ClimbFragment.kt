@@ -1,7 +1,6 @@
 package com.example.climbstation.fragments
 
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -9,16 +8,21 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.fragment.app.Fragment
 import com.example.climbstation.ConnectionInfo
 import com.example.climbstation.FirebaseRepo
 import com.example.climbstation.R
 import com.example.climbstation.retrofit.RestApiService
+import kotlinx.android.synthetic.main.fragment_climb.*
 import kotlinx.android.synthetic.main.fragment_climb.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import kotlin.concurrent.timer
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,7 +88,7 @@ class ClimbFragment : Fragment() {
         Log.d("asd", "Setting phase timer ${climbingPhase} time: ${phaseTime} seconds")
 
         // set angle
-        val angle = selection.climbingPhases[climbingPhase].angle
+        val angle = selection.climbingPhases[climbingPhase].angle.toString()
         setAngle(angle)
 
         // start timer for end of phase
@@ -113,7 +117,7 @@ class ClimbFragment : Fragment() {
         phaseTimer.start()
     }
 
-    private fun setAngle(angle: Int) {
+    private fun setAngle(angle: String) {
         Log.d("asd", "Setting wall angle ${angle}")
         val angleInfo = ConnectionInfo(
             "2c",
@@ -140,7 +144,7 @@ class ClimbFragment : Fragment() {
         }
     }
 
-    private fun setSpeed(speed: Int) {
+    private fun setSpeed(speed: String) {
         Log.d("asd", "Setting wall speed ${speed}")
         val speedInfo = ConnectionInfo(
             "2c",
@@ -169,8 +173,7 @@ class ClimbFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?): View? {
         login()
         val view = inflater!!.inflate(R.layout.fragment_climb, container, false)
         // Inflate the layout for this fragment view.mylist.adapter = ArrayAdapter(this.context, android.R.layout.simple_list_item_1,listOf("car", "plane"))
@@ -181,20 +184,12 @@ class ClimbFragment : Fragment() {
         view.start_button.setOnClickListener {
             view.start_button.isEnabled = false
             if (key != null) operate(view)
-            val timestamp = System.currentTimeMillis()
-            save("time",timestamp)
         }
 
         view.difficulty.text = "Difficulty: ${selection.name}"
         view.length.text = "Length: ${selection.length}"
 
         return view
-    }
-    fun save(key: String, bol: Long) {
-        val spassword: SharedPreferences? = activity?.getSharedPreferences("pref", MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = spassword?.edit()!!
-        editor.putLong(key, bol)
-        editor.apply()
     }
 
     fun login() {
@@ -223,7 +218,7 @@ class ClimbFragment : Fragment() {
                 //  Log.d("http", it.toString())
                 // Log.d("http",it.clientKey)
                 key = it.clientKey.toString()
-                Log.d("asd", it.response)
+                Log.d("asd",it.response)
             } else {
                 Log.d("asd", "Error registering new user")
             }
@@ -262,7 +257,7 @@ class ClimbFragment : Fragment() {
                 if(it.response == "OK" || true){
                     started = !started
                     if (started) {
-                        setSpeed(speedMMperSecond)
+                        setSpeed(speedMMperSecond.toString())
                         countDownTimer.start()
                         view.start_button.text = "Stop"
                         climbingPhase = 0
@@ -279,19 +274,10 @@ class ClimbFragment : Fragment() {
                         Log.d("asd", "climbTime is: ${climbTime}")
                         var climbLength = climbTime * speedMMperSecond / 1000
                         Log.d("asd", "climbLength is: ${climbLength}")
-                        Log.d("asd", "speedMMperSecond is: ${speedMMperSecond}")
-                        Log.d(
-                            "asd",
-                            "(climbTime * speedMMperSecond / 1000) is: ${(climbTime * speedMMperSecond / 1000)}"
-                        )
+                        Log.d("asd","speedMMperSecond is: ${speedMMperSecond}")
+                        Log.d("asd","(climbTime * speedMMperSecond / 1000) is: ${(climbTime * speedMMperSecond / 1000)}")
                         if (email != null) {
-                            firebaseRepo.sendData(
-                                email,
-                                climbTime,
-                                selection.name,
-                                climbLength.toInt(),
-                                8
-                            )
+                            firebaseRepo.sendData(email, climbTime, selection.name, climbLength.toInt(), 8)
                         }
 
                     }
@@ -304,12 +290,7 @@ class ClimbFragment : Fragment() {
 
     }
 
-    private val modeList: List<String> = arrayListOf(
-        "To next level",
-        "Random",
-        "Repeat",
-        "Slow down"
-    )
+    private val modeList: List<String> = arrayListOf("To next level", "Random", "Repeat", "Slow down")
 
     private var selectedMode: String = modeList[0]
 
@@ -324,8 +305,7 @@ class ClimbFragment : Fragment() {
     data class DifficultyData(
         val name: String,
         val length: Int,
-        val climbingPhases: List<AngleChange>
-    )
+        val climbingPhases: List<AngleChange>)
 
     private val listData: List<DifficultyData> = arrayListOf(
         DifficultyData(
@@ -353,8 +333,7 @@ class ClimbFragment : Fragment() {
                 AngleChange(2, 0),
                 AngleChange(2, 5),
                 AngleChange(2, 15),
-            )
-        ),
+            )),
         DifficultyData(
             "Easy",
             20,
@@ -370,8 +349,7 @@ class ClimbFragment : Fragment() {
                 AngleChange(2, 10),
                 AngleChange(2, 12),
 
-                )
-        ),
+            )),
         DifficultyData(
             "Endurance",
             30,
@@ -385,8 +363,7 @@ class ClimbFragment : Fragment() {
                 AngleChange(3, -10),
                 AngleChange(3, 2),
                 AngleChange(3, 10),
-            )
-        ),
+            )),
         DifficultyData(
             "Strength",
             30,
@@ -401,8 +378,7 @@ class ClimbFragment : Fragment() {
                 AngleChange(3, 8),
                 AngleChange(3, -15),
                 AngleChange(3, 5),
-            )
-        ),
+            )),
         DifficultyData(
             "Power",
             30,
@@ -419,8 +395,7 @@ class ClimbFragment : Fragment() {
                 AngleChange(3, 10),
                 AngleChange(3, -18),
                 AngleChange(3, -5),
-            )
-        ),
+            )),
         DifficultyData(
             "Athlete",
             40,
@@ -435,8 +410,7 @@ class ClimbFragment : Fragment() {
                 AngleChange(4, -25),
                 AngleChange(4, -5),
                 AngleChange(4, -10),
-            )
-        ),
+            )),
         DifficultyData(
             "Pro Athlete",
             40,
@@ -451,8 +425,7 @@ class ClimbFragment : Fragment() {
                 AngleChange(4, -22),
                 AngleChange(4, 0),
                 AngleChange(4, -25),
-            )
-        ),
+            )),
         DifficultyData(
             "Superhuman",
             40,
@@ -467,8 +440,7 @@ class ClimbFragment : Fragment() {
                 AngleChange(4, 3),
                 AngleChange(4, -35),
                 AngleChange(4, -40),
-            )
-        ),
+            )),
         DifficultyData(
             "Conqueror",
             40,
@@ -483,8 +455,7 @@ class ClimbFragment : Fragment() {
                 AngleChange(4, -10),
                 AngleChange(4, -38),
                 AngleChange(4, 10),
-            )
-        ),
+            )),
     )
 
 
@@ -498,8 +469,7 @@ class ClimbFragment : Fragment() {
                 ForegroundColorSpan(Color.GRAY),
                 0,
                 span.length,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         return span
     }

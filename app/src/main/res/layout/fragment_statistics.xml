@@ -1,113 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.StatisticsFragment">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="wrap_content">
 
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/imageView6"
+            android:layout_width="0dp"
 
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="-175dp"
-            android:layout_marginEnd="1dp"
-            android:src="@mipmap/cslogo_wh_red" />
-
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:src="@mipmap/cslogo_wh_red_thin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/textView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="140dp"
-            android:layout_marginEnd="52dp"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="56dp"
             android:gravity="left"
-            android:text="@string/stat_main" />
+            android:text="@string/stat_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
         <TextView
             android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="219dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginStart="168dp"
+            android:layout_marginEnd="32dp"
             android:gravity="left"
-            android:text="@string/stat_time" />
+            android:text="@string/stat_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
             android:id="@+id/tv_difficulty"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="248dp"
-            android:layout_marginEnd="102dp"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="32dp"
             android:gravity="left"
-            android:text="@string/stat_difficulty" />
+            android:text="@string/stat_difficulty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_time" />
 
         <TextView
             android:id="@+id/tv_lenght"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="275dp"
-            android:layout_marginEnd="89dp"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="32dp"
             android:gravity="left"
-            android:text="@string/stat_lenght" />
+            android:text="@string/stat_lenght"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_difficulty" />
 
         <TextView
             android:id="@+id/tv_speed"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="303dp"
-            android:layout_marginEnd="94dp"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="32dp"
             android:gravity="left"
-            android:text="@string/stat_speed" />
+            android:text="@string/stat_speed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_lenght" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="331dp"
-            android:layout_marginEnd="96dp"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="32dp"
             android:gravity="left"
-            android:text="@string/stat_cal" />
+            android:text="@string/stat_cal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_speed" />
 
         <TextView
             android:id="@+id/tv_date"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="383dp"
-            android:layout_marginEnd="55dp"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="32dp"
             android:gravity="left"
-            android:text="@string/stat_date" />
+            android:text="@string/stat_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <Button
             android:id="@+id/btn_stats"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="457dp"
-            android:layout_marginEnd="25dp"
 
-            android:text="@string/stat_btn" />
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/stat_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_date" />
 
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

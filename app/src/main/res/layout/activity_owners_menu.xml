@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingHorizontal="20dp"
+    android:padding="20dp"
     tools:context=".OwnersMenuActivity">
 
     <ImageView
@@ -23,44 +23,29 @@
         android:layout_marginTop="20dp"
         tools:ignore="UseSwitchCompatOrMaterialXml">
 
-        <TextView
-            android:id="@+id/Rmode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Restore Mode"
-            android:textSize="15sp"
-            android:textStyle="bold" />
 
-
-        <TextView
-            android:id="@+id/cont"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/Rmode"
-            android:text="restore"
-
-            />
         <Switch
             android:id="@+id/restore_angle"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Rmode"
-            android:layout_alignParentRight="true" />
+            android:layout_toLeftOf="@+id/txt_restore" />
+
+        <TextView
+            android:id="@+id/txt_restore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="restore"
+            android:textSize="18sp"
+
+            />
         <TextView
             android:layout_marginTop="10dp"
-            android:layout_below="@+id/cont"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start at the Same position"
-            />
-        <CheckBox
-            android:id="@+id/loc"
             android:layout_alignParentRight="true"
+            android:layout_below="@+id/txt_restore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/restore_angle"
+            android:text="Continue last position"
             />
     </RelativeLayout>
 
@@ -187,7 +172,6 @@
         >
 
         <TextView
-            android:id="@+id/adjust_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -195,15 +179,14 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/adjust_loc_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/scale"
-            android:background="@drawable/box_edit_text"
             android:inputType="numberDecimal"
-            android:maxLength="2"
+            android:maxLength="4"
             android:padding="5dp"
+            android:background="@drawable/box_edit_text"
             android:text="2450"
             android:textSize="18sp" />
 
@@ -216,17 +199,6 @@
             android:layout_marginLeft="10dp"
             android:text="meter"
             android:textSize="15sp" />
-        <Button
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:id="@+id/save_it"
-            android:backgroundTint="@color/colorAccent"
-            android:layout_width="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="Save Changes"
-            android:layout_height="wrap_content">
-
-        </Button>
 
 
     </RelativeLayout>
