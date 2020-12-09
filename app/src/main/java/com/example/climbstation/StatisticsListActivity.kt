@@ -22,13 +22,14 @@ class StatisticsListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.statistics_list)
 
-        loadPostData()
+        loadData()
 
         firestore_list.layoutManager = LinearLayoutManager(this)
         firestore_list.adapter =statisticsAdapter
     }
 
-    private fun loadPostData(){
+    //turns document from firestore to object and inserts into list
+    private fun loadData(){
     firebaseRepo.getData().addOnCompleteListener{
     if (it.isSuccessful){
         dataList = it.result!!.toObjects(ClimbItem::class.java)

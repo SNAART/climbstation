@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation_menu.setOnNavigationItemSelectedListener {
             when (it.itemId){
                 R.id.ic_climb -> useFragment(climbFragment)
-                R.id.ic_create -> useFragment(createFragment)
+                //R.id.ic_create -> useFragment(createFragment)
                 R.id.ic_statistics -> useFragment(statisticsFragment)
                 R.id.ic_settings -> useFragment(settingsFragment)
 
