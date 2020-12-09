@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/background_image_mt_castillo"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:backgroundTint="#8C8C8C"
+    android:backgroundTintMode="multiply">
 
 
     <Button
@@ -48,13 +50,15 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="368dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="-101dp"
-        app:srcCompat="@mipmap/cslogo_wh_red" />
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="1dp"
+        app:srcCompat="@mipmap/cslogo_wh_red_thin" />
 
 
 </RelativeLayout>
