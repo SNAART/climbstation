@@ -81,7 +81,7 @@ class CalibrationMenuActivity : AppCompatActivity() {
             null,
             null,
             null,
-            Integer.parseInt(angle)
+            angle
         )
 
         apiService.setAngle(userInfo) {

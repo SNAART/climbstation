@@ -65,7 +65,7 @@ class EditTerrins : AppCompatActivity() {
             null,
             null,
             null,
-            Integer.parseInt(angle))
+            angle)
 
         apiService.setAngle(userInfo) {
             if (it != null) {
@@ -134,7 +134,7 @@ class EditTerrins : AppCompatActivity() {
             null,
             null,
             null,
-            Integer.parseInt(speed),
+            speed,
             null
         )
 
