@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
 
         <ImageView
@@ -36,7 +36,13 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView6"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:shadowColor="#000000"
+            android:shadowDx="1.5"
+            android:shadowDy="1.3"
+            android:shadowRadius="1.6"/>
 
         <TextView
             android:id="@+id/tv_time"
@@ -48,6 +54,8 @@
             android:layout_marginEnd="16dp"
             android:text="@string/stat_time"
             android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.404"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,6 +72,8 @@
             android:layout_marginEnd="16dp"
             android:text="@string/stat_difficulty"
             android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.406"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +90,8 @@
             android:layout_marginEnd="16dp"
             android:text="@string/stat_lenght"
             android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.426"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,6 +108,8 @@
             android:layout_marginEnd="16dp"
             android:text="@string/stat_speed"
             android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.416"
             app:layout_constraintStart_toStartOf="parent"
@@ -112,6 +126,8 @@
             android:layout_marginEnd="16dp"
             android:text="@string/stat_cal"
             android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.412"
             app:layout_constraintStart_toStartOf="parent"
@@ -128,13 +144,16 @@
             android:layout_marginEnd="80dp"
             android:text="@string/stat_date"
             android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.547"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
+        <!--
         <Button
-            android:id="@+id/btn_stats"
+            android:id="@+id/btn_stats1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -149,6 +168,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_date" />
+-->
+
+        <com.google.android.material.button.MaterialButton
+
+            android:id="@+id/btn_stats"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:theme="@style/btnTheme"
+            android:layout_marginStart="64dp"
+
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/stat_btn"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            app:backgroundTint="@android:color/transparent"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_date"
+            app:layout_constraintVertical_bias="0.502"
+            app:strokeColor="#ff0000"
+            app:strokeWidth="2dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

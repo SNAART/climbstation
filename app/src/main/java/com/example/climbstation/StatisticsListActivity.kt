@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -24,8 +25,12 @@ class StatisticsListActivity : AppCompatActivity() {
 
         loadData()
 
+        firestore_list.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+
         firestore_list.layoutManager = LinearLayoutManager(this)
         firestore_list.adapter =statisticsAdapter
+
+
     }
 
     //turns document from firestore to object and inserts into list

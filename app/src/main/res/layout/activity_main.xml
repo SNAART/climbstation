@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/background_image_mt_castillo"
-    android:backgroundTint="#6F000000"
+    android:background="@mipmap/background"
+    android:backgroundTint="#5E5E5E"
+    android:backgroundTintMode="multiply"
     tools:context="com.example.climbstation.MainActivity">
 
     <FrameLayout
