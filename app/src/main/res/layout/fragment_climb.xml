@@ -91,103 +91,113 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressBar2"
+            android:id="@+id/bar1"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="144dp"
             android:layout_height="17dp"
             android:layout_marginStart="40dp"
             android:layout_marginBottom="32dp"
+            android:scaleY="2"
             app:layout_constraintBottom_toTopOf="@+id/difficulty"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressBar10"
+            android:id="@+id/bar2"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="144dp"
             android:layout_height="17dp"
             android:layout_marginStart="40dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar2"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar1"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressBar11"
+            android:id="@+id/bar4"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="144dp"
             android:layout_height="17dp"
             android:layout_marginStart="40dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar4"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar3"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressBar3"
+            android:id="@+id/bar6"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="144dp"
             android:layout_height="17dp"
             android:layout_marginStart="40dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar5"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar5"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressBar6"
+            android:id="@+id/bar9"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="144dp"
             android:layout_height="17dp"
             android:layout_marginStart="40dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar8"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar8"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressBar9"
+            android:id="@+id/bar10"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="144dp"
             android:layout_height="17dp"
             android:layout_marginStart="40dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar6"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar9"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressBar8"
+            android:id="@+id/bar8"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="144dp"
             android:layout_height="17dp"
             android:layout_marginStart="40dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar7"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar7"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressBar7"
+            android:id="@+id/bar7"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="144dp"
             android:layout_height="17dp"
             android:layout_marginStart="40dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar3"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar6"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressBar5"
+            android:id="@+id/bar5"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="144dp"
             android:layout_height="17dp"
             android:layout_marginStart="40dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar11"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar4"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressBar4"
+            android:id="@+id/bar3"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="144dp"
             android:layout_height="17dp"
             android:layout_marginStart="40dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar10"
+            android:scaleY="2"
+            app:layout_constraintBottom_toTopOf="@+id/bar2"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
