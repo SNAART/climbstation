@@ -29,6 +29,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Integer.min
 import kotlin.concurrent.timer
+import kotlin.math.log
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -277,12 +278,14 @@ class ClimbFragment : Fragment() {
             null,
             null
         )
+        Log.d("asd", "Just before operate $userInfo")
 
         restApiService.operate(userInfo){
-            if (it != null) {
+            if (it != null ) {//whyyy
                 // it = newly added user parsed as response
                 // it?.id = newly added user ID
                 Log.d("asd", "start response ${it.response}")
+                Log.d("asd","Straight after operate $it.toString()")
 
                 // the "|| true" part below is to make testing easier, maybe remove when server always works
                 if(it.response == "OK" || true){
