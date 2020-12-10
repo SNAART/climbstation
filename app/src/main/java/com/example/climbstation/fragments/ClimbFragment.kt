@@ -121,7 +121,7 @@ class ClimbFragment : Fragment() {
                 if (currentIndex == lastIndex) {
                     // stop the run
                     Log.d("asd", "Phase timer finished, stopping climb")
-                    operate(view)
+                    sendData(view)
                 } else {
                     //start the next phase
                     Log.d("asd", "Phase timer finished, starting next phase")
@@ -202,7 +202,7 @@ class ClimbFragment : Fragment() {
 
         view.start_button.setOnClickListener {
             view.start_button.isEnabled = false
-            if (key != null) operate(view)
+             sendData(view)
         }
 
         view.difficulty.text = "Difficulty: ${selection.name}"
@@ -257,7 +257,58 @@ class ClimbFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun operate(view: View){
+    fun sendData(view: View){
+        var operation: String = "start"
+        if (started == true){
+            operation = "stop"
+        }
+        started = !started
+        if (started) {
+            clearProgress(view)
+            //setSpeed(speedMMperSecond.toString())
+            countDownTimer.start()
+            view.start_button.text = "Stop"
+            climbingPhase = 0
+            setPhaseTimer(view)
+        } else {
+
+            view.start_button.text = "Start"
+            countDownTimer.cancel()
+            phaseTimer.cancel()
+            Log.d("asd", "Total climb time: ${millisecondsPassed / 1000} seconds")
+            //calculate time duration and send to statistics
+            var email = firebaseRepo.getUser()
+            var climbTime = millisecondsPassed / 1000
+            var climbLength: Double = (climbTime.toDouble() * speedMMperSecond.toDouble()) / 1000
+            Log.d("asd", "climb Length is: ${climbLength} meters")
+            if (email != null) {
+                firebaseRepo.sendData(email, climbTime, selection.name, climbLength.toInt(), 8,selection.length)
+            }
+
+            // set progress to be where run was stopped
+            val completedPhasesLength = selection
+                .climbingPhases
+                .filterIndexed { index, it -> index < climbingPhase }
+                .sumBy { it.distance }
+            val currentPhaseLength = selection.climbingPhases[climbingPhase].distance
+            val currentPhaseProgress = climbLength - completedPhasesLength
+            val currentPhasePercentage = currentPhaseProgress / currentPhaseLength * 100
+            animation?.end()
+            val barId = "bar${climbingPhase + 1}"
+            val id: Int = resources.getIdentifier(barId, "id", "com.example.climbstation")
+            val progress = view.findViewById<ProgressBar>(id)
+            progress.progress = currentPhasePercentage.toInt()
+            Log.d("asd", "Setting final progress ${currentPhasePercentage}")
+
+            //do the action related to the selected mode
+            modeAction(view)
+
+            millisecondsPassed = 0
+        }
+        view.start_button.isEnabled = true
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+  /*  fun operate(view: View){
         var operation: String = "start"
         if (started == true){
             operation = "stop"
@@ -284,7 +335,7 @@ class ClimbFragment : Fragment() {
             if (it != null ) {//whyyy
                 // it = newly added user parsed as response
                 // it?.id = newly added user ID
-              //  Log.d("asd", "start response ${it.response}")
+                Log.d("asd", "start response ${it.response}")
                 Log.d("asd","Straight after operate $it.toString()")
 
                 // the "|| true" part below is to make testing easier, maybe remove when server always works
@@ -341,10 +392,14 @@ class ClimbFragment : Fragment() {
 
     }
 
+   */
+
     private val modeList: List<String> = arrayListOf("To next level", "Random", "Repeat", "Slow down")
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private var selectedMode: String = modeList[0]
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun changeMode(view: View){
         val index = modeList.indexOf(selectedMode)
         val nextIndex = (index + 1) % 4
@@ -352,6 +407,7 @@ class ClimbFragment : Fragment() {
         view.mode.text = "Mode: ${selectedMode}"
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun modeAction(view: View){
         if(selectedMode == "To next level"){
             var currentID = listData.indexOf(selection)
