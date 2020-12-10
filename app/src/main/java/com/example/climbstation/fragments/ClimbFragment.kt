@@ -284,7 +284,7 @@ class ClimbFragment : Fragment() {
             if (it != null ) {//whyyy
                 // it = newly added user parsed as response
                 // it?.id = newly added user ID
-                Log.d("asd", "start response ${it.response}")
+              //  Log.d("asd", "start response ${it.response}")
                 Log.d("asd","Straight after operate $it.toString()")
 
                 // the "|| true" part below is to make testing easier, maybe remove when server always works
