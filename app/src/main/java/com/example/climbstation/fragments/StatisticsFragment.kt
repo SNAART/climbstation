@@ -46,7 +46,7 @@ class StatisticsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_statistics, container, false)
 
-    return view
+        return view
     }
 /*
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,22 +78,24 @@ class StatisticsFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun getLatestData() {
-        Log.d("fb","getdata started")
+        Log.d("fb", "getdata started")
         db.collection("climb_data")
             .whereEqualTo("email", "rasmus.karling@gmail.com") //user email here
-            .orderBy("date",Query.Direction.DESCENDING)
+            .orderBy("date", Query.Direction.DESCENDING)
             .limit(1)
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d("fb", "${document.id} => ${document.data}")
 
-                    tv_time.text = "Climb time: "+document.data["climbTime"]+"s"
-
+                    tv_climbed.text = "Congratulations, you\nclimbed " + document.data["length"] +
+                            " meters \nfrom " + document.data["totalLength"].toString() + " meters goal!"
+                    tv_time.text = "Climb time: " + document.data["climbTime"] + "s"
                     tv_difficulty.text = "Difficulty was: ${document.data["difficulty"]}"
-                    tv_lenght.text = "length climbed: "+document.data["lenght"].toString()+"m"
-                    tv_speed.text = "Average speed: "+document.data["avgSpeed"].toString()+"m/min"
-                    tv_date.text = "This climbing was done:"+document.data["date"]
+                    tv_lenght.text = "length climbed: " + document.data["length"].toString() + "m"
+                    tv_speed.text =
+                        "Average speed: " + document.data["avgSpeed"].toString() + "m/min"
+                    tv_date.text = "This climbing was done:" + document.data["date"]
                 }
             }
             .addOnFailureListener { exception ->
@@ -106,7 +108,7 @@ class StatisticsFragment : Fragment() {
         getLatestData()
 
         activity.let {
-            btn_stats.setOnClickListener{
+            btn_stats.setOnClickListener {
                 (activity as MainActivity?)!!.startList()
             }
         }

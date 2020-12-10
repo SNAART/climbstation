@@ -42,14 +42,14 @@ class FirebaseRepo {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun sendData(email: String, climbTime: Long, difficulty: String, length: Int, speed: Int){
+    fun sendData(email: String, climbTime: Long, difficulty: String, length: Int, speed: Int,totalLength:Int){
         val current = LocalDateTime.now()
 
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         val climbDate = current.format(formatter)
 
         val climbItem = ClimbItem(email, climbTime, difficulty,
-            length, speed, climbDate)
+            length, speed, climbDate,totalLength)
         fireBaseFirestore.collection("climb_data").document().set(climbItem)
     }
 }

@@ -12,7 +12,8 @@ data class ClimbItem(
     var email: String? = null,
     var climbTime: Long? = null,
     var difficulty: String? = null,
-    var lenght: Int? = null,
+    var length: Int? = null,
     var avgSpeed: Int? = null,
-    var date : String? = null
+    var date : String? = null,
+    var totalLength :Int? = null
 )
