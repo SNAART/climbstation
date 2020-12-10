@@ -27,7 +27,7 @@ class TestThingy : AppCompatActivity() {
         val apiService = RestApiService()
         val userInfo = ConnectionInfo(
             "2a",
-            1,
+            "1",
             "admin",
             "20110001",
             "CLIMBSTATION",
@@ -66,7 +66,7 @@ class TestThingy : AppCompatActivity() {
         val apiService = RestApiService()
         val userInfo = ConnectionInfo(
             "2c",
-            1,
+            "1",
             null,
             "20110001",
             null,
@@ -98,7 +98,7 @@ class TestThingy : AppCompatActivity() {
         val apiService = RestApiService()
         val userInfo = ConnectionInfo(
             "2d",
-            1,
+            "1",
             null,
             "20110001",
             null,

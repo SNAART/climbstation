@@ -17,21 +17,23 @@ import java.util.*
 
 class FirebaseRepo {
 
-    private val fireBaseAuth:FirebaseAuth = FirebaseAuth.getInstance()
+    private val fireBaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val fireBaseFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     //firebaseAuth
-    fun getUser():String?{
+    fun getUser(): String? {
         return fireBaseAuth.currentUser?.email
     }
+
     //firestore
-    fun getData():Task<QuerySnapshot>{
+    fun getData(): Task<QuerySnapshot> {
         return fireBaseFirestore
             .collection("climb_data")
             .whereEqualTo("email", getUser()) //user email here
             .orderBy("date", Query.Direction.DESCENDING)
             .get()
     }
+
     fun getLatestData(): Task<QuerySnapshot> {
         return fireBaseFirestore
             .collection("climb_data")
@@ -42,14 +44,23 @@ class FirebaseRepo {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun sendData(email: String, climbTime: Long, difficulty: String, length: Int, speed: Int,totalLength:Int){
+    fun sendData(
+        email: String,
+        climbTime: Long,
+        difficulty: String,
+        length: Int,
+        speed: Int,
+        totalLength: Int
+    ) {
         val current = LocalDateTime.now()
 
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         val climbDate = current.format(formatter)
 
-        val climbItem = ClimbItem(email, climbTime, difficulty,
-            length, speed, climbDate,totalLength)
+        val climbItem = ClimbItem(
+            email, climbTime, difficulty,
+            length, speed, climbDate, totalLength
+        )
         fireBaseFirestore.collection("climb_data").document().set(climbItem)
     }
 }

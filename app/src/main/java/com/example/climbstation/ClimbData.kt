@@ -14,6 +14,6 @@ data class ClimbItem(
     var difficulty: String? = null,
     var length: Int? = null,
     var avgSpeed: Int? = null,
-    var date : String? = null,
-    var totalLength :Int? = null
+    var date: String? = null,
+    var totalLength: Int? = null
 )

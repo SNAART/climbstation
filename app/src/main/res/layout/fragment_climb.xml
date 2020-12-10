@@ -67,6 +67,7 @@
             android:layout_height="235dp"
             android:layout_marginEnd="28dp"
             android:layout_marginBottom="32dp"
+            android:background="@drawable/list_bg"
             app:layout_constraintBottom_toTopOf="@+id/difficulty"
             app:layout_constraintEnd_toEndOf="parent" />
 

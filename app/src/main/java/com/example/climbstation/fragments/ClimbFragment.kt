@@ -111,6 +111,7 @@ class ClimbFragment : Fragment() {
             override fun onTick(millisUntilFinished: Long) {
             }
 
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onFinish() {
                 val phases = selection.climbingPhases;
                 // IS THE CURRENT INDEX THE LAST IN THE LIST?? index 2  == size 3
@@ -135,8 +136,8 @@ class ClimbFragment : Fragment() {
     private fun setAngle(angle: String) {
         Log.d("asd", "Setting wall angle ${angle}")
         val angleInfo = ConnectionInfo(
-            "2c",
-            1,
+            "2e",
+            "1",
             null,
             "20110001",
             null,
@@ -162,8 +163,8 @@ class ClimbFragment : Fragment() {
     private fun setSpeed(speed: String) {
         Log.d("asd", "Setting wall speed ${speed}")
         val speedInfo = ConnectionInfo(
-            "2c",
-            1,
+            "2d",
+            "1",
             null,
             "20110001",
             null,
@@ -178,14 +179,16 @@ class ClimbFragment : Fragment() {
             null
         )
         restApiService.setSpeed(speedInfo) {
-            if (it?.response == "OK") {
+            if (it?.response == "OK") { // it is null here
                 Log.d("asd", "Speed set successfully")
             } else {
+
                 Log.d("asd", "Speed was not set successfully")
             }
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -222,7 +225,7 @@ class ClimbFragment : Fragment() {
     fun login() {
         val userInfo = ConnectionInfo(
             "2a",
-            1,
+            "1",
             "admin",
             "20110001",
             "CLIMBSTATION",
@@ -238,7 +241,7 @@ class ClimbFragment : Fragment() {
         )
 
         restApiService.login(userInfo) {
-            Log.d("asd", "pääseekö tääne")
+            Log.d("asd", "http login start")
             if (it != null) {
                 // it = newly added user parsed as response
                 // it?.id = newly added user ID
@@ -247,7 +250,7 @@ class ClimbFragment : Fragment() {
                 key = it.clientKey.toString()
                 Log.d("asd",it.response)
             } else {
-                Log.d("asd", "Error registering new user")
+                Log.d("asd", "http login failed")
             }
         }
     }
@@ -260,7 +263,7 @@ class ClimbFragment : Fragment() {
         }
         val userInfo = ConnectionInfo(
             "2c",
-            1,
+            "1",
             null,
             "20110001",
             null,

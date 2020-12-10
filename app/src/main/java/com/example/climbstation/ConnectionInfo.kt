@@ -2,10 +2,10 @@ package com.example.climbstation
 
 import com.google.gson.annotations.SerializedName
 
-data class ConnectionInfo (
+data class ConnectionInfo(
     @SerializedName("PacketID") val packetId: String?,
-    @SerializedName("PacketNumber") val packetNumber: Int?,
-    @SerializedName("userID") val userId: String?,
+    @SerializedName("PacketNumber") val packetNumber: String?,
+    @SerializedName("UserID") val userId: String?,
     @SerializedName("ClimbstationSerialNo") val serialNo: String?,
     @SerializedName("password") val password: String?,
 
@@ -27,5 +27,5 @@ data class ConnectionInfo (
     @SerializedName("Angle") val angle: String?
 
 
-        )
+)
 

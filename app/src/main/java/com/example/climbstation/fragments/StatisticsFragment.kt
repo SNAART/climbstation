@@ -44,36 +44,11 @@ class StatisticsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_statistics, container, false)
-
-        return view
-    }
-/*
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-/*
-        btn_stats.setOnClickListener {
-           // Log.d("fb",currentUser)
-           // getLatestData( )
-
-        }
-
- */
+        return inflater.inflate(R.layout.fragment_statistics, container, false)
 
     }
 
- */
 
-    private fun getDateTime(s: String): String? {
-        try {
-            val sdf = SimpleDateFormat("dd/MM/yyyy")
-            val netDate = Date(s.toLong() * 1000)
-            return sdf.format(netDate)
-        } catch (e: Exception) {
-            return e.toString()
-        }
-    }
 
 
     @SuppressLint("SetTextI18n")

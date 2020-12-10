@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_climb.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val climbFragment =ClimbFragment()
+    private val climbFragment = ClimbFragment()
     private val createFragment = CreateFragment()
     private val statisticsFragment = StatisticsFragment()
     private val settingsFragment = SettingsFragment()
@@ -28,10 +28,10 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
-       var user = FirebaseAuth.getInstance().currentUser
-        if (user != null){
+        var user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
             startApp()
-        }else {
+        } else {
 
             setContentView(R.layout.login)
             sign_in.setOnClickListener {
@@ -47,17 +47,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun useFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_wrapper,fragment)
+            replace(R.id.fl_wrapper, fragment)
             commit()
         }
 
 
-    fun startList(){
+    fun startList() {
         val intent = Intent(this, StatisticsListActivity::class.java)
         startActivity(intent)
     }
 
-    private fun startApp(){
+    private fun startApp() {
         setContentView(R.layout.activity_main)
 
         useFragment(climbFragment)
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
 
         bottom_navigation_menu.setOnNavigationItemSelectedListener {
-            when (it.itemId){
+            when (it.itemId) {
                 R.id.ic_climb -> useFragment(climbFragment)
                 //R.id.ic_create -> useFragment(createFragment)
                 R.id.ic_statistics -> useFragment(statisticsFragment)

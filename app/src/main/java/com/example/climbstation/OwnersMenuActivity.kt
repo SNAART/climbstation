@@ -170,7 +170,7 @@ class OwnersMenuActivity : AppCompatActivity() {
 
         val userInfo = ConnectionInfo(
             "2b",
-            1,
+            "1",
             null,
             "20110001",
             null,

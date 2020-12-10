@@ -69,7 +69,7 @@ class CalibrationMenuActivity : AppCompatActivity() {
         var angle = num.toString()
         val userInfo = ConnectionInfo(
             "2e",
-            1,
+            "1",
             null,
             "20110001",
             "CLIMBSTATION",
@@ -153,7 +153,7 @@ class CalibrationMenuActivity : AppCompatActivity() {
 
         val userInfo = ConnectionInfo(
             "2b",
-            1,
+            "1",
             null,
             "20110001",
             null,

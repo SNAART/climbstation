@@ -53,7 +53,7 @@ class EditTerrins : AppCompatActivity() {
 
         val userInfo = ConnectionInfo(
             "2e",
-            1,
+            "1",
             null,
             "20110001",
             "CLIMBSTATION",
@@ -88,7 +88,7 @@ class EditTerrins : AppCompatActivity() {
 
         val userInfo = ConnectionInfo(
             "2b",
-            1,
+            "1",
             null,
             "20110001",
             null,
@@ -123,7 +123,7 @@ class EditTerrins : AppCompatActivity() {
 
         val userInfo = ConnectionInfo(
             "2d",
-            1,
+            "1",
             null,
             "20110001",
             null,
