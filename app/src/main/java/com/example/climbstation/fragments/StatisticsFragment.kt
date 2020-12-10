@@ -29,6 +29,8 @@ class StatisticsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private val firebaseRepo: FirebaseRepo = FirebaseRepo()
+    val email = firebaseRepo.getUser()
     var db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +57,7 @@ class StatisticsFragment : Fragment() {
     private fun getLatestData() {
         Log.d("fb", "getdata started")
         db.collection("climb_data")
-            .whereEqualTo("email", "rasmus.karling@gmail.com") //user email here
+            .whereEqualTo("email", email) //user email here
             .orderBy("date", Query.Direction.DESCENDING)
             .limit(1)
             .get()
